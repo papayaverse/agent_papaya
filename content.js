@@ -12,18 +12,7 @@ function makeGeminiNano(){
   });
 }
 
-/*function promptGeminiNano(promptText){
-  chrome.runtime.sendMessage({ type: "usePrompt", prompt: promptText}, (response) => {
-    if (response.success) {
-      console.log("Prompt response:", response);
-      console.log("Prompt result:", response.result);
-      return response.result;
-    } else {
-      console.error("Error using prompt:", response.error);
-    }
-  });
-}*/
-
+// prompt Gemini Nano
 function promptGeminiNano(promptText) {
   return new Promise((resolve, reject) => {
     chrome.runtime.sendMessage({ type: "usePrompt", prompt: promptText }, (response) => {
@@ -287,7 +276,170 @@ function useGeminiDetection() {
   });
 }
 
+class CookieBannerAgent {
+  constructor() {
+      this.state = "DETECTING"; // Initial state
+      this.banner = null;
+      this.attempts = 0;
+      this.maxAttempts = 3; // Prevent infinite loops
+  }
 
+  async run() {
+      while (this.state !== "DONE") {
+          switch (this.state) {
+              case "DETECTING":
+                  console.log("🔍 Detecting cookie banner...");
+                  this.banner = getExternalBanner(document);
+                  if (this.banner) {
+                      console.log("✅ Banner found.");
+                      this.state = "EXECUTING";
+                  } else {
+                      console.log("❌ No banner detected. Exiting.");
+                      this.state = "DONE";
+                  }
+                  break;
+
+              case "EXECUTING":
+                  console.log("⚡ Executing Gemini Nano detection...");
+                  const cleanedBanner = takeOutText(this.banner);
+                  const prompt = makeGeminiPrompt(cleanedBanner);
+
+                  try {
+                      const response = await promptGeminiNano(prompt);
+                      const parsedResponse = parseGeminiNanoResponse(response);
+
+                      if (parsedResponse) {
+                          console.log("✅ Gemini response received:", parsedResponse);
+                          this.executeAction(parsedResponse);
+                          this.state = "VERIFYING";
+                      } else {
+                          console.log("⚠️ Failed to parse Gemini response.");
+                          this.state = "RETRYING";
+                      }
+                  } catch (error) {
+                      console.error("❌ Error in execution:", error);
+                      this.state = "RETRYING";
+                  }
+                  break;
+
+              case "VERIFYING":
+                  console.log("🔄 Verifying if the banner is gone...");
+                  
+                  await this.verifyBannerRemoval(); // Ensures verification is handled properly
+
+                  break;
+
+              case "RETRYING":
+                  this.attempts++;
+                  if (this.attempts >= this.maxAttempts) {
+                      console.log("🚫 Max attempts reached. Giving up.");
+                      this.state = "DONE";
+                      break;
+                  }
+
+                  console.log(`♻️ Retrying... Attempt ${this.attempts}`);
+                  this.state = "EXECUTING";
+                  break;
+          }
+      }
+  }
+
+  async verifyBannerRemoval() {
+      return new Promise((resolve) => {
+          setTimeout(() => {
+              if (!getExternalBanner(document)) {
+                  console.log("✅ Banner successfully removed.");
+                  this.state = "DONE";
+              } else {
+                  console.log("❌ Banner still present. Retrying...");
+                  this.state = "RETRYING";
+              }
+              resolve();
+          }, 2000);
+      });
+  }
+
+  executeAction(parsedResponse) {
+      if (parsedResponse.reject_all) {
+          console.log("🛑 Clicking reject_all...");
+          findAndClickButton(parsedResponse.reject_all);
+      } else if (parsedResponse.manage_my_preferences) {
+          console.log("⚙️ Clicking manage_my_preferences...");
+          findAndClickButton(parsedResponse.manage_my_preferences);
+      } else if (parsedResponse.accept_all) {
+          console.log("✅ Clicking accept_all (last resort)...");
+          findAndClickButton(parsedResponse.accept_all);
+      } else {
+          console.log("🚫 No actionable buttons found.");
+      }
+  }
+}
+
+// Instantiate and run the agent
+const agent = new CookieBannerAgent();
+agent.run();
+
+// Helper function to find and click a button
+function findAndClickButton(buttonDetails) {
+  let button;
+
+  // Try to find the button by Text
+  if (buttonDetails.text) {
+    
+    const xpath = `//*[contains(text(), "${buttonDetails.text}")]`; 
+
+    button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    if (button) {
+      console.log(`Clicking button by Text (${buttonDetails.text}):`, button);
+      try {
+        button.click();
+        return true;
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    console.log(`Button not found by Text: ${buttonDetails.text}`);
+  }
+
+  // Try to find the button by ID
+  if (buttonDetails.id) {
+    button = document.getElementById(buttonDetails.id);
+    if (button) {
+      
+      console.log(`Clicking button by ID (${buttonDetails.id}):`, button);
+      try {
+        button.click();
+        return true;
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    console.log(`Button not found by ID: ${buttonDetails.id}`);
+  }
+
+  // Try to find the button by Class
+  if (buttonDetails.class) {
+    
+    const classXpath = `//*[${buttonDetails.class.split(' ').map(cls => `contains(@class, '${cls}')`).join(' and ')}]`;
+    button = document.evaluate(classXpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    if (button) {
+      console.log(`Clicking button by Class (${buttonDetails.class}):`, button);
+      try {
+        button.click();
+        return true;
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+    console.log(`Button not found by Class: ${buttonDetails.class}`);
+  }
+
+  console.log('Button not found by any selector:', buttonDetails);
+  return false;
+}
 
 // Function to handle cookie banners
 function handleCookieBanner(buttons, preferences) {
@@ -317,68 +469,6 @@ function handleCookieBanner(buttons, preferences) {
     setTimeout(() => {
       clickBanner(buttons);
     }, "1000");
-  }
-
-  // Helper function to find and click a button
-  function findAndClickButton(buttonDetails) {
-    let button;
-
-    // Try to find the button by Text
-    if (buttonDetails.text) {
-      
-      const xpath = `//*[contains(text(), "${buttonDetails.text}")]`; 
-
-      button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (button) {
-        console.log(`Clicking button by Text (${buttonDetails.text}):`, button);
-        try {
-          button.click();
-          return true;
-        }
-        catch (error) {
-          console.error(error);
-        }
-      }
-      console.log(`Button not found by Text: ${buttonDetails.text}`);
-    }
-
-    // Try to find the button by ID
-    if (buttonDetails.id) {
-      button = document.getElementById(buttonDetails.id);
-      if (button) {
-        
-        console.log(`Clicking button by ID (${buttonDetails.id}):`, button);
-        try {
-          button.click();
-          return true;
-        }
-        catch (error) {
-          console.error(error);
-        }
-      }
-      console.log(`Button not found by ID: ${buttonDetails.id}`);
-    }
-
-    // Try to find the button by Class
-    if (buttonDetails.class) {
-      
-      const classXpath = `//*[${buttonDetails.class.split(' ').map(cls => `contains(@class, '${cls}')`).join(' and ')}]`;
-      button = document.evaluate(classXpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-      if (button) {
-        console.log(`Clicking button by Class (${buttonDetails.class}):`, button);
-        try {
-          button.click();
-          return true;
-        }
-        catch (error) {
-          console.error(error);
-        }
-      }
-      console.log(`Button not found by Class: ${buttonDetails.class}`);
-    }
-
-    console.log('Button not found by any selector:', buttonDetails);
-    return false;
   }
 
   // Function to handle accept all path
@@ -459,10 +549,6 @@ function handleCookieBanner(buttons, preferences) {
       updateIconToDefault(); // Revert back to the default icon after a short delay
     }, 3000);  // Adjust delay as needed for your pages
   }
-
-
-
-
 }
 
 function getBaseDomain(url) {
@@ -503,7 +589,7 @@ chrome.storage.local.get(['marketing', 'performance'], (userPreferences) => {
         console.error('Error fetching button data:', chrome.runtime.lastError.message);
       } else {
         console.log('Button data received from background script:', buttonData);
-        handleCookieBanner(buttonData, userPreferences);
+        //handleCookieBanner(buttonData, userPreferences);
       }
     });
   }
