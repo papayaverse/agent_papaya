@@ -8,23 +8,28 @@
 </head>
 <body>
   <div class="top-bar">
-    <div class="title">Papaya CookieMonster</div>
+    <div class="title">Agent Papaya</div>
   </div>
   <div class="container">
     <div class="sidebar">
       <div class="sidebar-item" id="dashboardLink">Dashboard</div>
-      <div class="sidebar-item" id="cookiePreferencesLink">Cookie Preferences</div>
-      <div class="sidebar-item" id="paybackLink">Payback</div>
+      <div class="sidebar-item" id="cookiePreferencesLink">Cookies</div>
+      <div class="sidebar-item" id="gpcLink">Trackers</div>
+      <div class="sidebar-item" id="paybackLink">Carica Marketplace</div>
     </div>
     <div class="content" id="content">
       <div id="dashboard" class="tab-content">
         <h2>Dashboard</h2>
-        <p> CookieMonster has handled</p>
+        <p> Agent Papaya has handled</p>
         <p id="totalClicks"><b>0</b> Cookie Banners on</p>
         <p id="uniqueSites"><b>0</b> Unique Websites</p>
       </div>
       <div id="cookiePreferences" class="tab-content" style="display: none;">
-        <h2>Cookie Preferences</h2>
+        <h2>CookieMonster</h2>
+        <p> 
+          <b>CookieMonster</b> is our AI tool that helps you manage your cookie preferences. 
+          It allows you to set preferences for cookies that you want to reject and those you want to accept.
+        </p>
         <label>
           <input type="checkbox" id="marketing"> Allow Marketing Cookies
         </label><br>
@@ -34,14 +39,30 @@
         <button id="savePreferences">Save Preferences</button>
       </div>
       <div id="payback" class="tab-content" style="display: none;">
-        <h2>Payback (Coming Soon)</h2>
+        <h2>Carica Data Marketplace</h2>
+        <p>
+          <b>Your Data Your Choice!</b>
+        </p>
+        <p>
+          Carica is our ethical data marketplace that allows you to sell your data to companies, according to preferences set by you.
+        </p>
+        <p>
+          Companies will only ever see what you are comfortable with sharing.
+          And, you can earn money by selling your data to companies that are interested in your data.
+        </p>
         <p><a href="https://papayaverse.github.io/payback_samples/" class="btn" target="_blank">Preview</a></p>
-        <label for="loginUsername">Username:</label>
-        <input type="text" id="loginUsername" name="username">
-        <label for="loginPassword">Password:</label>
-        <input type="password" id="loginPassword" name="password">
-        <button id="loginButton" class="disabled" disabled>Login</button>
       </div>
+      <div id="gpc" class="tab-content" style="display: none;">
+        <h2>Trackers</h2>
+        <p> 
+          <b>Trackers</b> can be used to collect data about your browsing habits and preferences.
+          They can be used to track your online activity and collect data about your browsing habits and preferences.
+        </p>
+        <p> 
+          <b>Agent Papaya</b> can help you manage your trackers by blocking them from tracking your online activity.
+          We use the state of California's <b>Global Privacy Control</b> to block trackers from collecting your data.
+        </p>
+        <button id="blockTrackers">Block Trackers</button>
     </div>
   </div>
 

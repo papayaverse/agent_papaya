@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     showTab('payback');
   });
 
+  document.getElementById('gpcLink').addEventListener('click', function() {
+    showTab('gpc');
+  });
+
   function showTab(tabId) {
     // Hide all tab contents
     const tabs = document.querySelectorAll('.tab-content');
