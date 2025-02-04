@@ -15,6 +15,34 @@ const loadButtonData = () => {
     });
 };
 
+chrome.declarativeNetRequest.updateDynamicRules({
+  removeRuleIds: [1],
+  addRules: [{
+    id: 1,
+    priority: 1,
+    action: {
+      type: "modifyHeaders",
+      requestHeaders: [{
+        header: "Sec-GPC",
+        operation: "set",
+        value: "1"
+      }]
+    },
+    condition: {
+      urlFilter: "*",
+      resourceTypes: ["main_frame", "sub_frame"]
+    }
+  }]
+}, () => {
+  if (chrome.runtime.lastError) {
+    console.error("Failed to update GPC rules:", chrome.runtime.lastError);
+  } else {
+    console.log("✅ GPC header rule applied successfully!");
+  }
+});
+
+
+
 chrome.runtime.onInstalled.addListener((details) => {
   if (details && details.reason === 'install') {
     // Initialize counters on first install
