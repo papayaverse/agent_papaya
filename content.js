@@ -78,7 +78,7 @@ function getExternalBanner(doc) {
    */
   const keywords = [
     'cookie', 'cc-banner', 'tarteaucitron', 'iubenda', 'osano', 'consent', 
-    'gdpr', 'onetrust', 'wp-notification', 'privacy', 'notice', 'cookiebot',
+    'gdpr', 'onetrust', 'wp-notification', 'privacy', 'cookiebot',
     'cookieconsent', 'cookiebanner', 'cookie-policy', 'cookie-settings',
     'cookie-preferences', 'cookie-decline',
     'cookie-configuration', 'cookie-choices', 'cmp', 'cm',

@@ -27,21 +27,21 @@
   "action": {
     "default_popup": "popup2.html",
     "default_icon": {
-      "16": "agentPapayaFat.png",
-      "48": "agentPapayaFat.png",
-      "128": "agentPapayaFat.png"
+      "16": "agentPapayaCute.png",
+      "48": "agentPapayaCute.png",
+      "128": "agentPapayaCute.png"
     },
     "default_popup_width": 600,
     "default_popup_height": 200
   },
   "icons": {
-    "16": "agentPapayaFat.png",
-    "48": "agentPapayaFat.png",
-    "128": "agentPapayaFat.png"
+    "16": "agentPapayaCute.png",
+    "48": "agentPapayaCute.png",
+    "128": "agentPapayaCute.png"
   },
   "web_accessible_resources": [
     {
-      "resources": ["agentPapayaFat.png", "injectGPC.js"],
+      "resources": ["agentPapayaCute.png", "injectGPC.js"],
       "matches": ["<all_urls>"]
     }
   ]
