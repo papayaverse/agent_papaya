@@ -343,11 +343,10 @@ class CookieBannerAgent {
                   // can be removed
                   await this.delay(1000); // Delay to ensure the banner is fully processed
                   const prompt = makeGeminiPrompt(cleanedBanner);
-
                   try {
                       const response = await promptGeminiNano(prompt);
                       const parsedResponse = parseGeminiNanoResponse(response);
-
+                      chrome.runtime.sendMessage({ action: 'bannerClicked' });
                       if (parsedResponse) {
                           console.log("✅ External banner actions received:", parsedResponse);
                           await this.executeAction(parsedResponse, "external");
@@ -473,10 +472,10 @@ class CookieBannerAgent {
               console.log("🛑 Clicking reject_all on internal modal...");
               await findAndClickButton(parsedResponse.reject_all);
               await this.delay(1000);
-              if (parsedResponse.confirm_my_preferences) {
-                  console.log("✔️ Confirming preferences...");
-                  await findAndClickButton(parsedResponse.confirm_my_preferences);
-              }
+          }
+          if (parsedResponse.confirm_my_preferences) {
+            console.log("✔️ Confirming preferences...");
+            await findAndClickButton(parsedResponse.confirm_my_preferences);
           } else {
               console.log("✅ Clicking accept_all on internal modal (fallback)...");
               await findAndClickButton(parsedResponse.accept_all);
