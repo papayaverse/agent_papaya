@@ -313,21 +313,25 @@ function useGeminiDetection() {
 
 class CookieBannerAgent {
   constructor() {
-      this.state = "DETECTING_EXTERNAL"; // Start with the external banner
+      this.state = "DETECTING_EXTERNAL";
       this.externalBanner = null;
       this.internalBanner = null;
       this.attempts = 0;
-      this.maxAttempts = 3;
+      this.maxAttempts = 2;
+      this.userPreferences = { marketing: false, performance: false };
+      this.buttonData = null;
   }
 
   async run() {
+      await this.loadUserPreferences();
+      await this.loadButtonData();
+
       while (this.state !== "DONE") {
           switch (this.state) {
               case "DETECTING_EXTERNAL":
                   console.log("🔍 Detecting external banner...");
                   this.externalBanner = getExternalBanner(document);
-                  // can be removed
-                  await this.delay(1000); // Delay to ensure the banner is fully processed
+                  await this.delay(1000);
                   if (this.externalBanner) {
                       console.log("✅ External banner found.");
                       this.state = "EXECUTING_EXTERNAL";
@@ -339,30 +343,45 @@ class CookieBannerAgent {
 
               case "EXECUTING_EXTERNAL":
                   console.log("⚡ Handling external banner...");
-                  const cleanedBanner = takeOutText(this.externalBanner);
-                  // can be removed
-                  await this.delay(1000); // Delay to ensure the banner is fully processed
-                  const prompt = makeGeminiPrompt(cleanedBanner);
-                  try {
-                      const response = await promptGeminiNano(prompt);
-                      const parsedResponse = parseGeminiNanoResponse(response);
-                      chrome.runtime.sendMessage({ action: 'bannerClicked' });
-                      if (parsedResponse) {
-                          console.log("✅ External banner actions received:", parsedResponse);
-                          await this.executeAction(parsedResponse, "external");
-                      } else {
-                          console.log("⚠️ Failed to parse response.");
+                  
+                  if (this.buttonData) {
+                      console.log("✅ Using pre-stored button data.");
+                      await this.executeAction(this.buttonData.external_buttons, "external");
+                  } else {
+                      console.log("🔍 No pre-stored data, using Gemini Nano...");
+                      const cleanedBanner = takeOutText(this.externalBanner);
+                      const prompt = makeGeminiPrompt(cleanedBanner);
+
+                      try {
+                          const response = await promptGeminiNano(prompt);
+                          const parsedResponse = parseGeminiNanoResponse(response);
+                          chrome.runtime.sendMessage({ action: 'bannerClicked' });
+
+                          if (parsedResponse) {
+                              console.log("✅ Gemini Nano actions received:", parsedResponse);
+                              await this.executeAction(parsedResponse, "external");
+                          } else {
+                              console.log("⚠️ Failed to parse response.");
+                              this.state = "RETRYING";
+                          }
+                      } catch (error) {
+                          console.error("❌ Error in execution:", error);
                           this.state = "RETRYING";
                       }
-                  } catch (error) {
-                      console.error("❌ Error in execution:", error);
-                      this.state = "RETRYING";
                   }
                   break;
 
               case "DETECTING_INTERNAL":
                   console.log("🔍 Waiting for internal modal to appear...");
-                  await this.waitForInternalBanner();
+                  this.internalBanner = getInternalBanner(document);
+                  await this.delay(1000);
+                  if (this.internalBanner) {
+                      console.log("✅ Internal banner found.");
+                      this.state = "INTERNAL_EXECUTING";
+                  } else {
+                      console.log("❌ No internal banner detected. Exiting.");
+                      this.state = "DONE";
+                  }
                   break;
 
               case "INTERNAL_EXECUTING":
@@ -370,21 +389,31 @@ class CookieBannerAgent {
                   const cleanedInternalBanner = takeOutText(this.internalBanner);
                   const internalPrompt = makeGeminiPrompt(cleanedInternalBanner);
 
-                  try {
-                      const response = await promptGeminiNano(internalPrompt);
-                      const parsedResponse = parseGeminiNanoResponse(response);
-
-                      if (parsedResponse) {
-                          console.log("✅ Internal modal actions received:", parsedResponse);
-                          await this.executeAction(parsedResponse, "internal");
-                          this.state = "VERIFYING";
-                      } else {
-                          console.log("⚠️ Failed to parse internal response.");
-                          this.state = "RETRYING";
+                  if(this.buttonData){
+                      console.log("✅ Using pre-stored internal button data.");
+                      let internal_buttons_data = {};
+                      for (let button of this.buttonData.internal_buttons) {
+                        internal_buttons_data[button.option_name] = button;
                       }
-                  } catch (error) {
-                      console.error("❌ Error in internal execution:", error);
-                      this.state = "RETRYING";
+                      await this.executeAction(internal_buttons_data, "internal");
+                  } else {
+
+                    try {
+                        const response = await promptGeminiNano(internalPrompt);
+                        const parsedResponse = parseGeminiNanoResponse(response);
+
+                        if (parsedResponse) {
+                            console.log("✅ Internal modal actions received:", parsedResponse);
+                            await this.executeAction(parsedResponse, "internal");
+                            this.state = "VERIFYING";
+                        } else {
+                            console.log("⚠️ Failed to parse internal response.");
+                            this.state = "RETRYING";
+                        }
+                    } catch (error) {
+                        console.error("❌ Error in internal execution:", error);
+                        this.state = "RETRYING";
+                    }
                   }
                   break;
 
@@ -408,30 +437,67 @@ class CookieBannerAgent {
       }
   }
 
+  async executeAction(parsedResponse, bannerType) {
+      let actionType = (this.userPreferences.marketing && this.userPreferences.performance) ? "accept_all" : "reject_all";
+      console.log(`🔧 Using action type: ${actionType}`);
+      console.log("On Parsed response:", parsedResponse);
+      if (bannerType === "external") {
+          if (parsedResponse[actionType]) {
+              console.log(`🛑 Clicking ${actionType} on external banner...`);
+              await findAndClickButton(parsedResponse[actionType]);
+              await this.delay(1000);
+              this.state = "VERIFYING";
+          } else if (parsedResponse.manage_my_preferences) {
+              console.log("⚙️ Clicking manage_my_preferences...");
+              await findAndClickButton(parsedResponse.manage_my_preferences);
+              await this.delay(2000);
+              this.state = "DETECTING_INTERNAL";
+          } else {
+              console.log("✅ Clicking accept_all (fallback)...");
+              await findAndClickButton(parsedResponse.accept_all);
+              await this.delay(1000);
+              this.state = "VERIFYING";
+          }
+      } else if (bannerType === "internal") {
+          if (parsedResponse.reject_all) {
+              console.log("🛑 Clicking reject_all on internal modal...");
+              await findAndClickButton(parsedResponse.reject_all);
+              await this.delay(1000);
+          }
+          if (parsedResponse.confirm_my_preferences) {
+              console.log("✔️ Confirming preferences...");
+              await findAndClickButton(parsedResponse.confirm_my_preferences);
+          } else {
+              console.log("✅ Clicking accept_all on internal modal (fallback)...");
+              await findAndClickButton(parsedResponse.accept_all);
+          }
+      }
+  }
+
   async waitForInternalBanner() {
-      return new Promise((resolve) => {
-          let observer = new MutationObserver((mutations, obs) => {
-              this.internalBanner = getInternalBanner(document);
-              if (this.internalBanner) {
-                  console.log("✅ Internal modal detected.");
-                  this.state = "INTERNAL_EXECUTING";
-                  obs.disconnect();
-                  resolve();
-              }
-          });
+    return new Promise((resolve) => {
+        let observer = new MutationObserver((mutations, obs) => {
+            this.internalBanner = getInternalBanner(document);
+            if (this.internalBanner) {
+                console.log("✅ Internal modal detected.");
+                this.state = "INTERNAL_EXECUTING";
+                obs.disconnect();
+                resolve();
+            }
+        });
 
-          observer.observe(document.body, { childList: true, subtree: true });
+        observer.observe(document.body, { childList: true, subtree: true });
 
-          // Fallback: If modal doesn't appear within 5 seconds, assume failure
-          setTimeout(() => {
-              if (!this.internalBanner) {
-                  console.log("❌ Internal modal did not appear.");
-                  this.state = "VERIFYING";
-                  observer.disconnect();
-                  resolve();
-              }
-          }, 5000);
-      });
+        // Fallback: If modal doesn't appear within 5 seconds, assume failure
+        setTimeout(() => {
+            if (!this.internalBanner) {
+                console.log("❌ Internal modal did not appear.");
+                this.state = "VERIFYING";
+                observer.disconnect();
+                resolve();
+            }
+        }, 5000);
+    });
   }
 
   async verifyBannerRemoval() {
@@ -449,44 +515,42 @@ class CookieBannerAgent {
       });
   }
 
-  async executeAction(parsedResponse, bannerType) {
-      if (bannerType === "external") {
-          if (parsedResponse.reject_all) {
-              console.log("🛑 Clicking reject_all on external banner...");
-              await findAndClickButton(parsedResponse.reject_all);
-              await this.delay(1000);
-              this.state = "VERIFYING";
-          } else if (parsedResponse.manage_my_preferences) {
-              console.log("⚙️ Clicking manage_my_preferences...");
-              await findAndClickButton(parsedResponse.manage_my_preferences);
-              await this.delay(2000);
-              this.state = "DETECTING_INTERNAL"; // Wait for modal
-          } else {
-              console.log("✅ Clicking accept_all (fallback)...");
-              await findAndClickButton(parsedResponse.accept_all);
-              await this.delay(1000);
-              this.state = "VERIFYING";
-          }
-      } else if (bannerType === "internal") {
-          if (parsedResponse.reject_all) {
-              console.log("🛑 Clicking reject_all on internal modal...");
-              await findAndClickButton(parsedResponse.reject_all);
-              await this.delay(1000);
-          }
-          if (parsedResponse.confirm_my_preferences) {
-            console.log("✔️ Confirming preferences...");
-            await findAndClickButton(parsedResponse.confirm_my_preferences);
-          } else {
-              console.log("✅ Clicking accept_all on internal modal (fallback)...");
-              await findAndClickButton(parsedResponse.accept_all);
-          }
-      }
+  async loadUserPreferences() {
+      return new Promise((resolve) => {
+          chrome.storage.local.get(['marketing', 'performance'], (preferences) => {
+              if (chrome.runtime.lastError) {
+                  console.error('Error fetching user preferences:', chrome.runtime.lastError.message);
+              } else {
+                  console.log('User preferences received:', preferences);
+                  this.userPreferences = {
+                      marketing: preferences.marketing || false,
+                      performance: preferences.performance || false
+                  };
+              }
+              resolve();
+          });
+      });
+  }
+
+  async loadButtonData() {
+      return new Promise((resolve) => {
+          chrome.runtime.sendMessage({ action: 'getButtonData', domain: domain }, (response) => {
+              if (chrome.runtime.lastError) {
+                  console.error('Error fetching button data:', chrome.runtime.lastError.message);
+              } else {
+                  console.log('Button data received:', response);
+                  this.buttonData = response;
+              }
+              resolve();
+          });
+      });
   }
 
   async delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
+
 
 // Instantiate and run the agent
 window.addEventListener("load", () => {
