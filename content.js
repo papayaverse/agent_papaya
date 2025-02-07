@@ -170,6 +170,35 @@ function getInternalBanner(doc) {
   return topMostDiv;
 }
 
+function isBannerHidden(banner) {
+  if (!banner) return true; // If there's no banner, assume it's gone
+
+  const computedStyle = window.getComputedStyle(banner);
+
+  // Check CSS-based hiding
+  if (
+      computedStyle.display === "none" ||
+      computedStyle.visibility === "hidden" ||
+      computedStyle.opacity === "0"
+  ) {
+      return true;
+  }
+
+  // Check ARIA attributes
+  if (banner.hasAttribute("aria-hidden") && banner.getAttribute("aria-hidden") === "true") {
+      return true;
+  }
+
+  // Check if moved off-screen (some banners use left: -9999px)
+  const rect = banner.getBoundingClientRect();
+  if (rect.width === 0 || rect.height === 0 || rect.left < -1000 || rect.top < -1000) {
+      return true;
+  }
+
+  return false; // Banner is still visible
+}
+
+
 
 function takeOutText(htmlElement) {
   /**
@@ -507,19 +536,29 @@ class CookieBannerAgent {
   }
 
   async verifyBannerRemoval() {
-      return new Promise((resolve) => {
-          setTimeout(() => {
-              if (!getExternalBanner(document) && !getInternalBanner(document)) {
-                  console.log("✅ Banner successfully removed.");
-                  this.state = "DONE";
-              } else {
-                  console.log("❌ Banner still present. Retrying...");
-                  this.state = "RETRYING";
-              }
-              resolve();
-          }, 2000);
-      });
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const externalBanner = getExternalBanner(document);
+            const internalBanner = getInternalBanner(document);
+
+            if (!externalBanner || isBannerHidden(externalBanner)) {
+                console.log("✅ External banner successfully removed or hidden.");
+                if (!internalBanner || isBannerHidden(internalBanner)) {
+                    console.log("✅ Internal banner successfully removed or hidden.");
+                    this.state = "DONE";
+                } else {
+                    console.log("❌ Internal banner still present. Retrying...");
+                    this.state = "RETRYING";
+                }
+            } else {
+                console.log("❌ External banner still present. Retrying...");
+                this.state = "RETRYING";
+            }
+            resolve();
+        }, 2000);
+    });
   }
+
 
   async loadUserPreferences() {
       return new Promise((resolve) => {
