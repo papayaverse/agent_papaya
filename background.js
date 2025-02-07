@@ -111,6 +111,8 @@ function getGeminiNanoSession() {
 }
 
 
+
+
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.action === 'getButtonData') {
@@ -167,6 +169,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       .then((result) => sendResponse({ success: true, result }))
       .catch((error) => sendResponse({ success: false, error: error.message }));
     return true; // Respond asynchronously
+  } else if (message.action === "cacheButtonData") {
+    buttonData[message.domain] = message.buttonData;
+    console.log(`✅ Cached button data for ${message.domain}`);
+    sendResponse({ success: true });
   }
 });
 

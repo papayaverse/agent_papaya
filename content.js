@@ -92,8 +92,14 @@ function getExternalBanner(doc) {
     const id = div.id || ''; // Get the id of the element
     const ariaLabel = div.getAttribute('aria-label') || ''; // Get the aria-label attribute
 
-    // Combine classes, id, and aria-label for keyword matching
-    const attributesToCheck = [...classes, id, ariaLabel];
+    // ✅ Get **all** attributes as a dictionary
+    const attributes = Array.from(div.attributes).reduce((acc, attr) => {
+      acc.push(attr.name.toLowerCase(), attr.value.toLowerCase());
+      return acc;
+    }, []);
+
+    // Combine classes, id, and aria-label, and more for keyword matching
+    const attributesToCheck = [...classes, id, ariaLabel, ...attributes];
 
     //console.log('Checking div with attrs:', attributesToCheck);
 
