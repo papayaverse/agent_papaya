@@ -173,6 +173,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     buttonData[message.domain] = message.buttonData;
     console.log(`✅ Cached button data for ${message.domain}`);
     sendResponse({ success: true });
+  } else if (message.action === 'toggleGPC') {
+    const gpcEnabled = message.enabled;
   }
 });
 

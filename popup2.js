@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
+
+
+
   // Switch between tabs when sidebar items are clicked
   document.getElementById('dashboardLink').addEventListener('click', function() {
     showTab('dashboard');
@@ -127,5 +130,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   updateDashboard();
+
+  const gpcToggle = document.getElementById('gpcToggle');
+  const gpcStatus = document.getElementById('gpcStatus');
+
+  // Load saved GPC preference
+  chrome.storage.local.get(['gpcEnabled'], (data) => {
+      const isEnabled = data.gpcEnabled || false;
+      gpcToggle.checked = isEnabled;
+      gpcStatus.textContent = isEnabled ? "GPC is ON" : "GPC is OFF";
+    });
+
+    // Update GPC preference when toggle is switched
+    gpcToggle.addEventListener('change', function() {
+        const isEnabled = gpcToggle.checked;
+        chrome.storage.local.set({ gpcEnabled: isEnabled }, () => {
+            console.log(`GPC preference updated: ${isEnabled}`);
+            gpcStatus.textContent = isEnabled ? "GPC is ON" : "GPC is OFF";
+
+            // Notify the background script to update GPC settings
+            chrome.runtime.sendMessage({ action: 'toggleGPC', enabled: isEnabled });
+        });
+    });
+
+
   
 });
