@@ -12,5 +12,11 @@ function injectScript(file) {
 }
 
 // Inject `injectGPC.js` into the webpage context
-injectScript("injectGPC.js");
-console.log("✅ GPC content script injected successfully.");
+chrome.storage.local.get(['gpcEnabled'], (gpc) => {
+    if (gpc.gpcEnabled) {
+        injectScript("injectGPC.js");
+        console.log("✅ GPC content script injected successfully.");
+    } else {
+        console.log("❌ GPC content script not injected.");
+    }
+});
