@@ -630,69 +630,6 @@ function findAndClickButton(buttonDetails) {
   return false;
 }
 
-
-// Helper function to find and click a button
-function findAndClickButtonOldDeprecated(buttonDetails) {
-  let button;
-
-  // Try to find the button by ID
-  if (buttonDetails.id) {
-    button = document.getElementById(buttonDetails.id);
-    if (button) {
-      
-      console.log(`Clicking button by ID (${buttonDetails.id}):`, button);
-      try {
-        button.click();
-        return true;
-      }
-      catch (error) {
-        console.error(error);
-      }
-    }
-    console.log(`Button not found by ID: ${buttonDetails.id}`);
-  }
-
-  // Try to find the button by Text
-  if (buttonDetails.text) {
-    
-    const xpath = `//*[contains(text(), "${buttonDetails.text}")]`; 
-
-    button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    if (button) {
-      console.log(`Clicking button by Text (${buttonDetails.text}):`, button);
-      try {
-        button.click();
-        return true;
-      }
-      catch (error) {
-        console.error(error);
-      }
-    }
-    console.log(`Button not found by Text: ${buttonDetails.text}`);
-  }
-
-  // Try to find the button by Class
-  if (buttonDetails.class) {
-    
-    const classXpath = `//*[${buttonDetails.class.split(' ').map(cls => `contains(@class, '${cls}')`).join(' and ')}]`;
-    button = document.evaluate(classXpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    if (button) {
-      console.log(`Clicking button by Class (${buttonDetails.class}):`, button);
-      try {
-        button.click();
-        return true;
-      }
-      catch (error) {
-        console.error(error);
-      }
-    }
-    console.log(`Button not found by Class: ${buttonDetails.class}`);
-  }
-
-  console.log('Button not found by any selector:', buttonDetails);
-  return false;
-}
-
 function highlightAndClick(button) {
   console.log(`✨ Highlighting and clicking button:`, button);
 
