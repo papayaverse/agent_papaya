@@ -1,11 +1,31 @@
-# Cookie Monster Version 4
+# Agent Papaya: Your Privacy Companion
 
-The fourth version of this project will be able to execute user preferences across websites not only in our dataset but also on websites not in the dataset using Google's Gemini Nano.
+🚀 NEW UPDATE: Agent Papaya now features in-browser AI!
 
-Here are some of the things it can do:
+🤖 Auto-click cookie banners with Gemini Nano
+🔒 Block trackers using Global Privacy Control (GPC)
+⚡ Faster performance & improved user control
 
-1. Reject All on External Banner
-2. Manage Preferences on External Banner, Reject All on Internal Banner
-3. Accept All
+Instructions to use this extension with in-browser AI:
 
-Made in collaboration with GPT-4o and GPT-3.5.
+Updated 2/8/2025
+
+1. Navigate to https://github.com/papayaverse/agent_papaya
+2. Clone the repository
+    
+    ```
+    // cd to desired folder in your Terminal
+    
+    git clone https://github.com/papayaverse/agent_papaya.git
+    ```
+    
+3. Navigate to chrome://extensions
+4. Select <Load unpacked> and select the folder where agent_papaya 
+5. Navigate to chrome://flags
+6. Ensure that <Prompt API for Gemini Nano> is enabled
+7. Ensure that <Optimization Guide on Device> is “Enabled bypass perf requirement” 
+8. Navigate to https://chrome.dev/web-ai-demos/prompt-api-playground/
+9. Type a prompt (ex. “Hello World!”) and ensure that the prompt returns an output 
+10. Open Incognito mode and navigate to any website with a cookie banner, e.g.  https://www.hobbs.com/us/product/petite-saskia-shower-resistant-trench-coat/0122-3991-9057L04-NAVY.html 
+
+Important: this will take a while the first time, as the LLM is downloading on your device.
