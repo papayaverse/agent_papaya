@@ -8,14 +8,6 @@ body {
   box-sizing: border-box;
 }
 
-.top-bar {
-  background-color: #333;
-  color: #ff7d10;
-  padding: 10px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-}
 
 .container {
   display: flex;
@@ -154,4 +146,32 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(20px);
+}
+
+.top-bar {
+  background-color: #333;
+  color: #ff7d10;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* This centers the text */
+  position: relative; /* Allows precise logo positioning */
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 20px; /* Keeps the logo on the left */
+}
+
+.title {
+  flex-grow: 1;
+  text-align: center; /* Ensures the title is centered */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.disabled {
+  cursor: not-allowed;
 }

@@ -603,8 +603,36 @@ window.addEventListener("load", () => {
   agent.run();
 });
 
-// Helper function to find and click a button
 function findAndClickButton(buttonDetails) {
+  let button;
+
+  // Try to find the button by ID
+  if (buttonDetails.id) {
+      button = document.getElementById(buttonDetails.id);
+      if (button) return highlightAndClick(button);
+  }
+
+  // Try to find the button by Text
+  if (buttonDetails.text) {
+      const xpath = `//*[contains(text(), "${buttonDetails.text}")]`;
+      button = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (button) return highlightAndClick(button);
+  }
+
+  // Try to find the button by Class
+  if (buttonDetails.class) {
+      const classXpath = `//*[${buttonDetails.class.split(' ').map(cls => `contains(@class, '${cls}')`).join(' and ')}]`;
+      button = document.evaluate(classXpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+      if (button) return highlightAndClick(button);
+  }
+
+  console.log('❌ Button not found by any selector:', buttonDetails);
+  return false;
+}
+
+
+// Helper function to find and click a button
+function findAndClickButtonOldDeprecated(buttonDetails) {
   let button;
 
   // Try to find the button by ID
@@ -664,6 +692,25 @@ function findAndClickButton(buttonDetails) {
   console.log('Button not found by any selector:', buttonDetails);
   return false;
 }
+
+function highlightAndClick(button) {
+  console.log(`✨ Highlighting and clicking button:`, button);
+
+  // Add highlight class
+  button.classList.add('papaya-highlight');
+
+  // Click the button after a short delay (to let users see the highlight)
+  setTimeout(() => {
+      button.click();
+      console.log("✅ Button clicked:", button);
+      
+      // Remove the highlight after clicking
+      setTimeout(() => button.classList.remove('papaya-highlight'), 1000);
+  }, 500); // 500ms delay to show highlight before clicking
+
+  return true;
+}
+
 
 // Function to handle cookie banners
 function handleCookieBanner(buttons, preferences) {
@@ -837,3 +884,17 @@ function collectData() {
 // Call the function to check preferences and collect data
 //collectData();
 
+const style = document.createElement('style');
+style.innerHTML = `
+    @keyframes papaya-flash {
+        0% { border: 15px solid #ff7d10; box-shadow: 0 0 20px 5px #ff7d10; }
+        50% { border: 15px solid transparent; box-shadow: 0 0 10px 3px #ff7d10; }
+        100% { border: 15px solid #ff7d10; box-shadow: 0 0 20px 5px #ff7d10; }
+    }
+
+    .papaya-highlight {
+        animation: papaya-flash 1s infinite alternate;
+        transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+`;
+document.head.appendChild(style);
