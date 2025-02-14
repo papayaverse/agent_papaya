@@ -390,7 +390,6 @@ class CookieBannerAgent {
                       try {
                           const response = await promptGeminiNano(prompt);
                           const parsedResponse = parseGeminiNanoResponse(response);
-                          chrome.runtime.sendMessage({ action: 'bannerClicked' });
 
                           if (parsedResponse) {
                               console.log("✅ Gemini Nano actions received:", parsedResponse);
@@ -640,6 +639,7 @@ function highlightAndClick(button) {
   setTimeout(() => {
       button.click();
       console.log("✅ Button clicked:", button);
+      chrome.runtime.sendMessage({ action: 'bannerClicked' });
       
       // Remove the highlight after clicking
       setTimeout(() => button.classList.remove('papaya-highlight'), 1000);
