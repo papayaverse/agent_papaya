@@ -31,8 +31,8 @@
       "48": "agentPapayaCute.png",
       "128": "agentPapayaCute.png"
     },
-    "default_popup_width": 600,
-    "default_popup_height": 200
+    "default_popup_width": 800,
+    "default_popup_height": 800
   },
   "icons": {
     "16": "agentPapayaCute.png",
