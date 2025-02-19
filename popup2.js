@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Load saved GPC preference
   chrome.storage.local.get(['gpcEnabled'], (data) => {
-      const isEnabled = data.gpcEnabled || false;
+      const isEnabled = data.gpcEnabled || true;
       gpcToggle.checked = isEnabled;
       gpcStatus.textContent = isEnabled ? "GPC is ON" : "GPC is OFF";
     });
