@@ -45,10 +45,18 @@ document.addEventListener('DOMContentLoaded', function() {
   // Load preferences from storage
   function loadPreferences() {
     chrome.storage.local.get(['marketing', 'performance'], (preferences) => {
-      document.getElementById('marketing').checked = preferences.marketing || false;
-      document.getElementById('performance').checked = preferences.performance || false;
+      if (preferences.marketing && preferences.performance) {
+        document.querySelector("input[value='acceptAll']").checked = true;
+      } else if (!preferences.marketing && !preferences.performance) {
+        document.querySelector("input[value='rejectAll']").checked = true;
+      } else if (preferences.marketing && !preferences.performance) {
+        document.querySelector("input[value='onlyMarketing']").checked = true;
+      } else if (!preferences.marketing && preferences.performance) {
+        document.querySelector("input[value='onlyPerformance']").checked = true;
+      }
     });
   }
+  
 
   // Save preferences to the backend
   function saveBackendCookiePreferences(cookiePreferences) {
@@ -91,32 +99,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
   }
-  // Save preferences to storage
+  // new save prefs
   function savePreferences() {
-    const marketing = document.getElementById('marketing').checked;
-    const performance = document.getElementById('performance').checked;
-
+    const selectedOption = document.querySelector("input[name='cookieSetting']:checked").value;
+    
+    let marketing = false, performance = false;
+  
+    if (selectedOption === "acceptAll") {
+      marketing = true;
+      performance = true;
+    } else if (selectedOption === "onlyMarketing") {
+      marketing = true;
+      performance = false;
+    } else if (selectedOption === "onlyPerformance") {
+      marketing = false;
+      performance = true;
+    }
+  
+    // Save preferences in local storage
     chrome.storage.local.set({ marketing, performance }, () => {
-      //alert('Cookie preferences saved locally successfully!');
-      console.log('Cookie preferences saved locally successfully!');
+      console.log('Cookie preferences saved:', { marketing, performance });
     });
-
-    const cookiePreferences = {
-      allow_marketing: marketing,
-      allow_performance: performance
-    };
-
-  // Call the backend function to save preferences
-  saveBackendCookiePreferences(cookiePreferences)
+  
+    // Save preferences to backend
+    const cookiePreferences = { allow_marketing: marketing, allow_performance: performance };
+    saveBackendCookiePreferences(cookiePreferences)
       .then(() => {
-          alert('Cookie Preferences saved successfully');
+        alert('Cookie Preferences saved successfully');
       })
       .catch((error) => {
-          alert('Error saving preferences to the server: ' + error.message);
-          console.error('Error saving preferences to the server:', error);
+        alert('Error saving preferences to the server: ' + error.message);
+        console.error('Error saving preferences:', error);
       });
-
-
   }
   
   function updateDashboard() {

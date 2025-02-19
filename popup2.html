@@ -30,18 +30,27 @@
       </div>
       <div id="cookiePreferences" class="tab-content" style="display: none;">
         <h2>CookieMonster</h2>
-        <p> 
-          <b>CookieMonster</b> is our AI tool that helps you manage your cookie preferences. 
-          It allows you to set preferences for cookies that you want to reject and those you want to accept.
-        </p>
+        <p><b>CookieMonster</b> is our AI tool that helps you manage your cookie preferences.</p>
+        <p>Set your preferences below:</p>
+        
         <label>
-          <input type="checkbox" id="marketing"> Allow Marketing Cookies
+          <input type="radio" name="cookieSetting" value="acceptAll"> Accept All Cookies
         </label><br>
+        
         <label>
-          <input type="checkbox" id="performance"> Allow Performance Cookies
-        </label>
+          <input type="radio" name="cookieSetting" value="rejectAll"> Reject All Cookies
+        </label><br>
+        
+        <label>
+          <input type="radio" name="cookieSetting" value="onlyMarketing"> Only Marketing Cookies
+        </label><br>
+        
+        <label>
+          <input type="radio" name="cookieSetting" value="onlyPerformance"> Only Performance Cookies
+        </label><br>
+        
         <button id="savePreferences">Save Preferences</button>
-      </div>
+      </div>      
       <div id="payback" class="tab-content" style="display: none;">
         <h2>Payback with Carica</h2>
         <p>

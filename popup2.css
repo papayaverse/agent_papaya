@@ -176,3 +176,7 @@ input:checked + .slider:before {
 .disabled {
   cursor: not-allowed;
 }
+
+input[type="radio"] {
+  margin-right: 5px;
+}
