@@ -135,7 +135,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       iconPath = 'small_green_tick.png'; // Path to your active icon
     } else {
       
-      iconPath = 'cookie_monster_small.png'; // Path to your default icon
+      iconPath = 'agentPapayaCuteSmall.png'; // Path to your default icon
     }
     chrome.action.setIcon({ path: iconPath, tabId: sender.tab.id });
   } else if (message.action === 'bannerClicked') {
