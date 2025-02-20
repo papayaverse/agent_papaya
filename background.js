@@ -131,10 +131,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === 'updateIcon') {
     let iconPath = '';
     if (message.icon === 'active') {
-      
-      iconPath = 'small_green_tick.png'; // Path to your active icon
+      chrome.action.setBadgeText({ text: "✅" }); // Display a small alert
+      iconPath = 'agentPapayaCuteSmall.png'; // Path to your active icon
     } else {
-      
+      chrome.action.setBadgeText({ text: "" }); // Clear the alert
       iconPath = 'agentPapayaCuteSmall.png'; // Path to your default icon
     }
     chrome.action.setIcon({ path: iconPath, tabId: sender.tab.id });
