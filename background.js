@@ -49,6 +49,7 @@ chrome.runtime.onInstalled.addListener((details) => {
     chrome.storage.local.set({ totalClicks: 0, uniqueSites: {} }, () => {
       console.log('Counters initialized on first install.');
     });
+    chrome.storage.local.set({ gpcEnabled: true });
 
     // Collect cookie preferences for the first time after install
     collectCookiePreferences();
@@ -56,6 +57,7 @@ chrome.runtime.onInstalled.addListener((details) => {
     // Collect preferences after an extension update
     collectCookiePreferences();
     console.log('Extension updated, collecting preferences.');
+    chrome.storage.local.set({ gpcEnabled: true });
   }
 });
 
