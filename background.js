@@ -194,6 +194,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     sendResponse(buttonCache[message.domain] || null);
     return true;
   } else if (message.action === "cacheButtonData") {
+    console.log("Caching button data for", message.domain);
     cacheButtonData(message.domain, message.buttonData);
     sendResponse({ success: true });
     return true;
