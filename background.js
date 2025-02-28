@@ -1,5 +1,24 @@
 let buttonData = [];
 
+let buttonCache = {};
+
+// Load stored button data at startup
+chrome.storage.local.get(['buttonCache'], (data) => {
+  if (data.buttonCache) {
+    buttonCache = data.buttonCache;
+    console.log("🔄 Loaded cached button data:", buttonCache);
+  }
+});
+
+// Function to cache button data
+function cacheButtonData(domain, buttonData) {
+  buttonCache[domain] = buttonData;
+  chrome.storage.local.set({ buttonCache }, () => {
+    console.log(`✅ Cached button data for ${domain}`);
+  });
+}
+
+
 // Load the JSON data once when the service worker starts and store it in a Promise
 const loadButtonData = () => {
   return fetch(chrome.runtime.getURL('url_data2.json'))
@@ -171,10 +190,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       .then((result) => sendResponse({ success: true, result }))
       .catch((error) => sendResponse({ success: false, error: error.message }));
     return true; // Respond asynchronously
+  } else if (message.action === "getCachedButtonData") {
+    sendResponse(buttonCache[message.domain] || null);
+    return true;
   } else if (message.action === "cacheButtonData") {
-    buttonData[message.domain] = message.buttonData;
-    console.log(`✅ Cached button data for ${message.domain}`);
+    cacheButtonData(message.domain, message.buttonData);
     sendResponse({ success: true });
+    return true;
   } else if (message.action === 'toggleGPC') {
     const gpcEnabled = message.enabled;
   }
