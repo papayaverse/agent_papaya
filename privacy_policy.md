@@ -1,6 +1,6 @@
-# Privacy Policy for Papaya CookieMonster Extension
+# Privacy Policy for Agent Papaya Extension
 ## Introduction
-Thank you for using the Papaya CookieMonster extension. Your privacy is important to us, and we are committed to protecting the personal information you share with us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your information.
+Thank you for using the Agent Papaya extension. Your privacy is important to us, and we are committed to protecting the personal information you share with us. This Privacy Policy explains what information we collect, how we use it, and your rights regarding your information.
 
 ## Information We Collect
 Cookie Preferences: The extension collects and stores your preferences for marketing and performance cookies locally on your device. This information is used to automatically manage cookie consent banners based on your settings.

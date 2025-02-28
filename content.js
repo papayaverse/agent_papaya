@@ -71,117 +71,6 @@ function injectMonster() {
       }, 2500);  // Adjust timing to match the animation duration
 }
 
-
-// Function to handle cookie banners
-function handleCookieBanner(buttons, preferences) {
-  //injectMonster();
-  const { marketing, performance } = preferences;
-
-  let actionType = 'reject_all'; // Default to reject_all if no preference for domain
-  if (marketing === true && performance === true) {
-    actionType = 'accept_all';
-  }
-
-  if (!buttons) {
-    console.log('Using gemini for:', domain);
-    setTimeout(() => {
-      useGeminiDetection().then((fetchedButtons) => {
-        if (fetchedButtons) {
-          console.log('Fetched buttons:', fetchedButtons);
-          let newButtons = {'external_buttons' : fetchedButtons};
-          clickBanner(newButtons);
-        } else {
-          console.log("something went wrong with fetchedButtons")
-        }
-      });
-    }, "3000");
-  } else {
-    console.log('Using precomputed data for:', domain);
-    setTimeout(() => {
-      clickBanner(buttons);
-    }, "1000");
-  }
-
-  // Function to handle accept all path
-  function handleAcceptAll(buttons) {
-    if (buttons.external_buttons && buttons.external_buttons.accept_all) {
-      const acceptAllClicked = findAndClickButton(buttons.external_buttons.accept_all);
-      if (acceptAllClicked) return;
-    }
-
-    if (buttons.external_buttons && buttons.external_buttons.manage_my_preferences) {
-      const manageMyPreferencesClicked = findAndClickButton(buttons.external_buttons.manage_my_preferences);
-      if (manageMyPreferencesClicked) {
-        // Wait for internal buttons to appear
-        setTimeout(() => {
-          if (buttons.internal_buttons) {
-            buttons.internal_buttons.forEach(button => {
-              if (button.option_name === 'accept_all') {
-                const acceptAllClicked = findAndClickButton(button);
-                  // Click confirm my preferences after accept all
-                setTimeout(() => {
-                  buttons.internal_buttons.forEach(button => {
-                    if (button.option_name === 'confirm_my_preferences') {
-                      findAndClickButton(button);
-                    }
-                  });
-                }, 2000);
-              }
-            });
-          }
-        }, 2000); // Adjust delay as needed for your pages
-        return;
-      }
-    }
-  }
-
-  // Function to handle reject all path
-  function handleRejectAll(buttons) {
-    if (buttons.external_buttons && buttons.external_buttons.reject_all) {
-      const rejectAllClicked = findAndClickButton(buttons.external_buttons.reject_all);
-      if (rejectAllClicked) return;
-    }
-
-    if (buttons.external_buttons && buttons.external_buttons.manage_my_preferences) {
-      const manageMyPreferencesClicked = findAndClickButton(buttons.external_buttons.manage_my_preferences);
-      if (manageMyPreferencesClicked) {
-        // Wait for internal buttons to appear
-        setTimeout(() => {
-          if (buttons.internal_buttons) {
-            buttons.internal_buttons.forEach(button => {
-              if (button.option_name === 'reject_all') {
-              const rejectAllClicked = findAndClickButton(button);
-                // Click confirm my preferences after reject all
-                setTimeout(() => {
-                  buttons.internal_buttons.forEach(button => {
-                    if (button.option_name === 'confirm_my_preferences') {
-                      findAndClickButton(button);
-                    }
-                  });
-                }, 2000);
-              }
-            });
-          }
-        }, 2000); // Adjust delay as needed for your pages
-        return;
-      }
-    }
-  }
-  function clickBanner(buttons){
-    updateIconToActive();
-    // Notify background script that a banner was clicked
-    chrome.runtime.sendMessage({ action: 'bannerClicked' });
-    if (actionType === 'accept_all') {
-      handleAcceptAll(buttons);
-    } else {
-      handleRejectAll(buttons);
-    }
-    setTimeout(() => {
-      updateIconToDefault(); // Revert back to the default icon after a short delay
-    }, 3000);  // Adjust delay as needed for your pages
-  }
-}
-
 function getBaseDomain(url) {
   const hostname = url.hostname;
   const domainParts = hostname.split('.');
@@ -242,7 +131,6 @@ function collectData() {
 }
 
 // Call the function to check preferences and collect data
-//collectData();
 
 const style = document.createElement('style');
 style.innerHTML = `
