@@ -14,12 +14,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('paybackLink').addEventListener('click', function() {
-    showTab('payback');
+    //showTab('payback');
   });
 
   document.getElementById('gpcLink').addEventListener('click', function() {
     showTab('gpc');
   });
+
+  const sitesList = document.getElementById('clickedSitesList');
 
   function showTab(tabId) {
     // Hide all tab contents
