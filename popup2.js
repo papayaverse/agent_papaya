@@ -22,6 +22,17 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   const sitesList = document.getElementById('clickedSitesList');
+  const toggleButton = document.getElementById('toggleSitesButton');
+
+  toggleButton.addEventListener('click', function () {
+    if (sitesList.style.display === 'none') {
+      sitesList.style.display = 'block';
+      toggleButton.innerHTML = "Hide Sites ▲";
+    } else {
+      sitesList.style.display = 'none';
+      toggleButton.innerHTML = "Show Sites ▼";
+    }
+  });
 
   function showTab(tabId) {
     // Hide all tab contents
