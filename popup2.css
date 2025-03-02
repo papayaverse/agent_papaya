@@ -10,7 +10,7 @@ body {
 
 /* Increase font size for readability */
 p, label, button, .sidebar-item {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -37,7 +37,7 @@ p, label, button, .sidebar-item {
   padding: 15px;
   text-align: left;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -67,7 +67,7 @@ p, label, button, .sidebar-item {
 button {
   background-color: #007bff;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   padding: 12px;
   border-radius: 8px;
   cursor: pointer;
@@ -84,7 +84,7 @@ button:focus {
 
 /* Improve contrast for focusable elements */
 a {
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: underline;
 }
 
@@ -98,7 +98,7 @@ button:disabled {
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 20px;
   color: #000; /* High contrast text */
 }
@@ -168,7 +168,7 @@ input:checked + .slider:before {
 .title {
   flex-grow: 1;
   text-align: center; /* Ensures the title is centered */
-  font-size: 24px;
+  font-size: 22px;
   font-weight: bold;
 }
 

@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
   chrome.storage.local.get(['gpcEnabled'], (data) => {
       const isEnabled = data.gpcEnabled;
       gpcToggle.checked = isEnabled;
-      gpcStatus.textContent = isEnabled ? "GPC is ON" : "GPC is OFF";
+      gpcStatus.textContent = isEnabled ? "Global Privacy Control is ON" : "Global Privacy Control is OFF";
     });
 
     // Update GPC preference when toggle is switched
