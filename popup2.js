@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+  
+
 
 
   // Switch between tabs when sidebar items are clicked
@@ -137,9 +139,22 @@ document.addEventListener('DOMContentLoaded', function() {
     chrome.storage.local.get(['totalClicks', 'uniqueSites'], (data) => {
       const { totalClicks, uniqueSites } = data;
       const uniqueSitesCount = Object.keys(uniqueSites).length;
+      const clickedSites = Object.keys(uniqueSites || {});
   
       document.getElementById('totalClicks').textContent = `${totalClicks} Cookie Banners on`;
       document.getElementById('uniqueSites').textContent = `${uniqueSitesCount} Unique Websites`;
+
+        // Populate the list of unique sites
+      if (clickedSites.length === 0) {
+        sitesList.innerHTML = '<p>No cookie banners clicked yet.</p>';
+      } else {
+        let listHTML = '<ul>';
+        clickedSites.forEach(site => {
+          listHTML += `<li>${site}</li>`;
+        });
+        listHTML += '</ul>';
+        sitesList.innerHTML = listHTML;
+      }
     });
   }
 
