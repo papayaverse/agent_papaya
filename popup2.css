@@ -4,8 +4,14 @@ body {
   margin: 0;
   padding: 0;
   min-width: 500px;
-  min-height: 300px;
+  min-height: 400px;
   box-sizing: border-box;
+}
+
+/* Increase font size for readability */
+p, label, button, .sidebar-item {
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 
@@ -15,14 +21,15 @@ body {
   height: calc(100% - 50px); /* Adjust height minus top bar */
 }
 
+/* Improve sidebar accessibility */
 .sidebar {
-  width: 120px;
-  background-color: #333;
+  width: 140px;
+  background-color: #222; /* Darker for contrast */
   color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
 .sidebar-item {
@@ -30,14 +37,15 @@ body {
   padding: 15px;
   text-align: left;
   cursor: pointer;
-  font-size: 16px;
-  /* white-space: nowrap; /* Prevents text from wrapping */
+  font-size: 18px;
+  font-weight: bold;
 }
 
-.sidebar-item.active,
-.sidebar-item:hover {
-  background-color: #444;
-}
+.sidebar-item:focus,
+  .sidebar-item:hover {
+    background-color: #444;
+    outline: 3px solid #ff7d10; /* High contrast outline */
+  }
 
 .content {
   flex-grow: 1;
@@ -55,31 +63,33 @@ body {
   display: block;
 }
 
+/* Improve button accessibility */
 button {
   background-color: #007bff;
   color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
+  font-size: 18px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
-  width: 80%; /* Make buttons 80 percent width */
-  box-sizing: border-box;
-  margin-top: 10px; /* Add spacing between buttons */
+  width: 90%;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
 
-a.btn {
-  background-color: #ff7d10;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  width: 80%; /* Make buttons 80 percent width */
-  box-sizing: border-box;
-  margin-top: 10px; /* Add spacing between buttons */
-  margin-bottom: 10px; /* Add spacing between buttons */
+button:focus {
+  outline: 3px solid #ff7d10;
+  box-shadow: 0 0 10px #ff7d10;
+}
+
+/* Improve contrast for focusable elements */
+a {
+  font-size: 18px;
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 3px solid #ff7d10;
 }
 
 button:disabled {
@@ -87,21 +97,10 @@ button:disabled {
   cursor: not-allowed;
 }
 
-label {
-  display: block;
-  margin-bottom: 10px; /* Add spacing between labels */
-}
-
-p {
-  font-size: 14px;
-  display: block;
-  margin-bottom: 10px; /* Add spacing between labels */
-}
-
-
 h2 {
-  font-size: 18px;
+  font-size: 22px;
   margin-bottom: 20px;
+  color: #000; /* High contrast text */
 }
 
 .switch {
@@ -177,6 +176,9 @@ input:checked + .slider:before {
   cursor: not-allowed;
 }
 
+/* Improve input accessibility */
 input[type="radio"] {
-  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
 }

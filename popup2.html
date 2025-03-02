@@ -13,10 +13,10 @@
   </div>  
   <div class="container">
     <div class="sidebar">
-      <div class="sidebar-item" id="dashboardLink">Dashboard</div>
-      <div class="sidebar-item" id="cookiePreferencesLink">Cookies</div>
-      <div class="sidebar-item" id="gpcLink">Trackers</div>
-      <div class="sidebar-item" id="paybackLink"></div>
+      <div class="sidebar-item" id="dashboardLink" aria-label="Go to Dashboard">Dashboard</div>
+      <div class="sidebar-item" id="cookiePreferencesLink" aria-label="Manage Cookie Preferences">Cookies</div>
+      <div class="sidebar-item" id="gpcLink" aria-label="Manage Trackers">Trackers</div>
+      <div class="sidebar-item" id="paybackLink" aria-label="Payback Data Marketplace">Payback</div>
     </div>
     <div class="content" id="content">
       <div id="dashboard" class="tab-content">
@@ -27,7 +27,7 @@
         <p>---------------------</p>
 
         <p><b>Sites where Agent Papaya clicked cookie banners:</b></p>
-        <button id="toggleSitesButton">Show Sites ▼</button>
+        <button id="toggleSitesButton" aria-expanded="false">Show Sites ▼</button>
           <div id="clickedSitesList" style="display: none;">
               <p>Loading...</p>
           </div>
@@ -41,19 +41,19 @@
         <p>Set your preferences below:</p>
         
         <label>
-          <input type="radio" name="cookieSetting" value="acceptAll"> Accept All Cookies
+          <input type="radio" name="cookieSetting" value="acceptAll" aria-label="Accept All Cookies"> Accept All Cookies
         </label><br>
         
         <label>
-          <input type="radio" name="cookieSetting" value="rejectAll"> Reject All Cookies
+          <input type="radio" name="cookieSetting" value="rejectAll" aria-label="Reject All Cookies"> Reject All Cookies
         </label><br>
         
         <label>
-          <input type="radio" name="cookieSetting" value="onlyMarketing"> Only Marketing Cookies
+          <input type="radio" name="cookieSetting" value="onlyMarketing" aria-label="Only Marketing Cookies"> Only Marketing Cookies
         </label><br>
         
         <label>
-          <input type="radio" name="cookieSetting" value="onlyPerformance"> Only Performance Cookies
+          <input type="radio" name="cookieSetting" value="onlyPerformance" aria-label="Only Performance Cookies"> Only Performance Cookies
         </label><br>
         
         <button id="savePreferences">Save Preferences</button>
