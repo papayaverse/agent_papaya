@@ -1,33 +1,3 @@
-//load gemini nano
-
-function makeGeminiNano(){
-  chrome.runtime.sendMessage({ type: "makeGeminiNano" }, (response) => {
-    if (response.success) {
-      console.log(response.message);
-      console.log("Gemini Nano session detected successfully:");
-
-    } else {
-      console.error("Error detecting Gemini Nano:", response.error);
-    }
-  });
-}
-
-// prompt Gemini Nano
-function promptGeminiNano(promptText) {
-  return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage({ type: "usePrompt", prompt: promptText }, (response) => {
-      if (response && response.success) {
-        console.log("Prompt response received:", response.result);
-        resolve(response.result); // Resolve with the result
-      } else {
-        console.error("Error using prompt:", response?.error || "Unknown error");
-        reject(new Error(response?.error || "Failed to get a valid response"));
-      }
-    });
-  });
-}
-
-
 // functions to change icon
 
 function updateIconToActive() {
