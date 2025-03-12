@@ -173,9 +173,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         }
         const newTotalClicks = totalClicks + 1;
         const updatedUniqueSites = { ...uniqueSites };
-        if (!updatedUniqueSites[domain]) {
-          updatedUniqueSites[domain] = true; // Mark this site as clicked
-        }
+        updatedUniqueSites[domain] = message.text; // Mark this site as clicked
         chrome.storage.local.set({ totalClicks: newTotalClicks, uniqueSites: updatedUniqueSites });
       });
     }
