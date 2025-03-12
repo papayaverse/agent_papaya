@@ -163,7 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         let listHTML = '<ul>';
         clickedSites.forEach(site => {
-          listHTML += `<li>${site} : ${uniqueSites[site]}</li>`;
+          listHTML += `<li>${site} ` 
+          if (uniqueSites[site] != true) {
+            listHTML += `: "${uniqueSites[site]}" was clicked`
+          }
+          listHTML += `</li>`;
         });
         listHTML += '</ul>';
         sitesList.innerHTML = listHTML;
