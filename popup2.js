@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', function() {
     showTab('gpc');
   });
 
+  document.getElementById('changeCookiePreferences').addEventListener('click', function() {
+    showTab('cookiePreferences');
+  });
+
+
   const sitesList = document.getElementById('clickedSitesList');
   const toggleButton = document.getElementById('toggleSitesButton');
 
