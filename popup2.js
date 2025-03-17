@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  
-
-
-
   // Switch between tabs when sidebar items are clicked
   document.getElementById('dashboardLink').addEventListener('click', function() {
     showTab('dashboard');
@@ -173,6 +169,46 @@ document.addEventListener('DOMContentLoaded', function() {
         sitesList.innerHTML = listHTML;
       }
     });
+    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+      if (tabs.length === 0) return;
+      const currentDomain = new URL(tabs[0].url).hostname;
+
+      chrome.storage.local.get(['totalClicks', 'uniqueSites'], (data) => {
+          const { totalClicks = 0, uniqueSites = {} } = data;
+          const uniqueSitesCount = Object.keys(uniqueSites).length;
+          const clickedSites = Object.keys(uniqueSites);
+
+          // Update Total Clicks and Unique Sites
+          document.getElementById('totalClicks').textContent = `${totalClicks} Cookie Banners on`;
+          document.getElementById('uniqueSites').textContent = `${uniqueSitesCount} Unique Websites`;
+
+          // Update "Current Website" section
+          if (uniqueSites[currentDomain] && uniqueSites[currentDomain] !== true) {
+              document.getElementById('currentSite').textContent = 
+                  `Cookie banner clicked on ${currentDomain}: "${uniqueSites[currentDomain]}"`;
+          } else {
+              document.getElementById('currentSite').textContent = 
+                  `No interactions recorded on ${currentDomain}`;
+          }
+
+          // Populate the list of clicked sites
+          const sitesList = document.getElementById('clickedSitesList');
+          if (clickedSites.length === 0) {
+              sitesList.innerHTML = '<p>No cookie banners clicked yet.</p>';
+          } else {
+              let listHTML = '<ul>';
+              clickedSites.forEach(site => {
+                  listHTML += `<li>${site} `;
+                  if (uniqueSites[site] !== true) {
+                      listHTML += `: "${uniqueSites[site]}" was clicked`;
+                  }
+                  listHTML += `</li>`;
+              });
+              listHTML += '</ul>';
+              sitesList.innerHTML = listHTML;
+          }
+      });
+  });
   }
 
   updateDashboard();
