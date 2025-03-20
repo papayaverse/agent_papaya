@@ -1,5 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
 
+  function getBaseDomain(url) {
+    const hostname = url.hostname;
+    const domainParts = hostname.split('.');
+    
+    // Known common TLDs that consist of multiple parts
+    const knownTLDs = [
+      'co.uk', 'org.uk', 'gov.uk', 'ac.uk',
+      'com.au', 'net.au', 'org.au',
+      'co.in', 'net.in', 'org.in',
+      // Add more if needed
+    ];
+  
+    // Check if the hostname ends with one of the known TLDs
+    for (let tld of knownTLDs) {
+      if (hostname.endsWith(tld)) {
+        return domainParts.slice(-3).join('.'); // Take the last 3 parts (subdomain + domain + TLD)
+      }
+    }
+  
+    // If not, assume the last 2 parts are the domain (like example.com or example.co.uk)
+    return domainParts.slice(-2).join('.');
+  }
+
   
     document.getElementById('currentSiteLink').addEventListener('click', function() {
       showTab('currentSite');
@@ -33,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function flushCookieBannerDataForWebsite() {
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         if (tabs.length === 0) return;
-        const currentDomain = new URL(tabs[0].url).hostname;
+        let currentDomain = getBaseDomain(new URL(tabs[0].url));
         alert('We are really sorry! AI makes mistakes sometimes. Flushing cookie banner button data for ' + currentDomain);
         chrome.runtime.sendMessage({ action: 'flushData', domain: currentDomain });
       });
