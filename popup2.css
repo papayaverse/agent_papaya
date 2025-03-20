@@ -24,6 +24,8 @@ p, label, button, .sidebar-item {
 /* Improve sidebar accessibility */
 .sidebar {
   width: 140px;
+  min-width: 140px; /* Prevent shrinking */
+  max-width: 140px; /* Prevent growing */
   background-color: #222; /* Darker for contrast */
   color: white;
   display: flex;
@@ -181,4 +183,15 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   margin-right: 8px;
+}
+
+.sidebar-heading {
+  font-size: 14px;
+  font-weight: bold;
+  color: #bbb; /* Lighter gray to differentiate it */
+  text-transform: uppercase;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-top: 1px solid #444; /* Adds a separator line */
+  pointer-events: none; /* Ensures it’s unclickable */
 }

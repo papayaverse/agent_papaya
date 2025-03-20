@@ -1,25 +1,46 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  // Switch between tabs when sidebar items are clicked
-  document.getElementById('dashboardLink').addEventListener('click', function() {
-    showTab('dashboard');
-  });
+  
+    document.getElementById('currentSiteLink').addEventListener('click', function() {
+      showTab('currentSite');
+    });
+  
+    document.getElementById('statsLink').addEventListener('click', function() {
+      showTab('stats');
+    });
+  
+    document.getElementById('cookiePreferencesLink').addEventListener('click', function() {
+      showTab('cookiePreferences');
+    });
+  
+    document.getElementById('gpcLink').addEventListener('click', function() {
+      showTab('gpc');
+    });
+  
+    document.getElementById('updatesLink').addEventListener('click', function() {
+      showTab('updates');
+    });
+  
+    document.getElementById('changeCookiePreferences').addEventListener('click', function() {
+      showTab('cookiePreferences');
+    });
+  
+    document.getElementById('reportIssue').addEventListener('click', function() {
+      //alert("Reported issue with Cookie Banner!"); // Placeholder
+      flushCookieBannerDataForWebsite();
+    });
 
-  document.getElementById('cookiePreferencesLink').addEventListener('click', function() {
-    showTab('cookiePreferences');
-  });
-
-  document.getElementById('paybackLink').addEventListener('click', function() {
-    //showTab('payback');
-  });
-
-  document.getElementById('gpcLink').addEventListener('click', function() {
-    showTab('gpc');
-  });
-
-  document.getElementById('changeCookiePreferences').addEventListener('click', function() {
-    showTab('cookiePreferences');
-  });
+    function flushCookieBannerDataForWebsite() {
+      chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+        if (tabs.length === 0) return;
+        const currentDomain = new URL(tabs[0].url).hostname;
+        alert('Flushing data for ' + currentDomain);
+        chrome.runtime.sendMessage({ action: 'flushData', domain: currentDomain });
+      });
+    }
+  
+    // Initialize first tab
+    showTab('currentSite');
 
 
   const sitesList = document.getElementById('clickedSitesList');
@@ -48,9 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebarItems.forEach(item => item.style.backgroundColor = '');
     document.getElementById(tabId + 'Link').style.backgroundColor = '#444';
   }
-
-  // Initialize the first tab as active
-  showTab('dashboard');
 
   // Load preferences
   loadPreferences();
@@ -189,11 +207,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
           // Update "Current Website" section
           if (uniqueSites[currentDomain] && uniqueSites[currentDomain] !== true) {
-              document.getElementById('currentSite').textContent = 
-                  `Cookie banner clicked on ${currentDomain}: "${uniqueSites[currentDomain]}"`;
+              document.getElementById('currentSiteInfo').textContent = 
+                  `Cookie banner button clicked: "${uniqueSites[currentDomain]}"`;
           } else {
-              document.getElementById('currentSite').textContent = 
-                  `No interactions recorded on ${currentDomain}`;
+              document.getElementById('currentSiteInfo').textContent = 
+                  `No button clicked`;
           }
 
           // Populate the list of clicked sites

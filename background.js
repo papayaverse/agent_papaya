@@ -200,8 +200,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   } else if (message.action === 'toggleGPC') {
     const gpcEnabled = message.enabled;
+  } else if (message.action == 'flushData') {
+    let domain = message.domain;
+    unCacheButtonData(domain);
+    sendResponse({ success: true });
   }
 });
+
+function unCacheButtonData(domain) {
+  delete buttonCache[domain];
+  chrome.storage.local.set({ buttonCache }, () => {
+    console.log(`✅ Uncached button data for ${domain}`);
+  });
+}
 
 //Save Data to the backend
 function saveBackendData(dataBrowsing){
