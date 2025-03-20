@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         if (tabs.length === 0) return;
         const currentDomain = new URL(tabs[0].url).hostname;
-        alert('Flushing data for ' + currentDomain);
+        alert('We are really sorry! AI makes mistakes sometimes. Flushing cookie banner button data for ' + currentDomain);
         chrome.runtime.sendMessage({ action: 'flushData', domain: currentDomain });
       });
     }
