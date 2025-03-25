@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Agent Papaya: Your Privacy Companion",
-  "version": "5.5.9",
+  "version": "5.5.11",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu7Q5DQRUQ7M4kKokMET+BUujLuQ/vYQgcBt46FwqVa2S2qRi3zWayUl3G5b90JLdZRJyfJH7GSA4dmSRa+Jo2eWTwKHJHD1KLxD68s/QCY9H3Xz/0wwEbuke0snuLxQ5Dga/6DfnDplx5NOkU0ktYUnV/5PkN/hT+MQwrOioXBwIi33icrB9FfLct8EK6ZXZEDfJNp525L3zf2fvdzy+yVG9M8qMh+jq5eNYjl9nZR6lVqB5HQaH9v7BbmNEBL4DBFzyRpJmx/IMi9hVnn3KD4FBhpKx45myjvIUul6jOshn67Y/0Ka+4qYvjr/gG/62J8tFoMeViGWkqomJLzM+tQIDAQAB",
   "permissions": ["storage", "aiLanguageModelOriginTrial", "declarativeNetRequest"],
   "trial_tokens": ["AgFT4FwU5/PnnqoxjPR1dKBkWSu7u5Vk5Oa7zhvvsv8Oeg1ABEDb221UvRPqt9P8MlbOisK0KEiD+q1tk3YnXgoAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vbGxucG1nYWVqaG9vZWxscGJiYmljamhkZmlwY2tka2EiLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"],
