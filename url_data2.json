@@ -1,5 +1,6 @@
 {
     "12onyourside.com": {
+        "verified": true,
         "external_buttons": {
             "reject_all": {
                 "text": "Reject All",
@@ -50,6 +51,7 @@
         ]
     },
     "350.org": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "id": "cn-accept-cookie"
@@ -60,6 +62,7 @@
         }
     },
     "3dsystems.com": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
@@ -109,6 +112,8 @@
         ]
     },
     "6play.fr": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Je paramètre",
@@ -162,6 +167,7 @@
         ]
     },
     "8newsnow.com": {
+        "verified": false,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -173,6 +179,7 @@
         }
     },
     "aa.com.tr": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -189,6 +196,8 @@
         }
     },
     "abb.com": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie settings",
@@ -203,6 +212,7 @@
         }
     },
     "about.me": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Got it"
@@ -210,6 +220,7 @@
         }
     },
     "aboutcookies.org": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all"
@@ -220,6 +231,8 @@
         }
     },
     "accorhotels.com": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Customize",
@@ -266,6 +279,7 @@
         ]
     },
     "acehotel.com": {
+        "verified": true,
         "external_buttons": {
             "reject_all": {
                 "text": "Reject All"
@@ -276,6 +290,7 @@
         }
     },
     "acer.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookies Settings",
@@ -324,6 +339,7 @@
         ]
     },
     "acm.org": {
+        "verified": true,
         "external_buttons": {
             "reject_all": {
                 "id": "CybotCookiebotDialogBodyButtonDecline",
@@ -337,6 +353,8 @@
         }
     },
     "acs.org": {
+        "verified": true,
+        "human": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept & Close",
@@ -346,6 +364,8 @@
         }
     },
     "act.org": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
@@ -358,13 +378,17 @@
         }
     },
     "adb.org": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
-                "text": "Accept"
+                "text": "Accept",
+                "class": "agree-button"
             }
         }
     },
     "adfc.de": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Datenschutz",
@@ -413,6 +437,7 @@
         ]
     },
     "advantech.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Customize"
@@ -425,14 +450,17 @@
             }
         }
     },
-    "affordable-papers.net": {
+    "affordablepapers.com": {
+        "verified": true,
+        "human": true,
         "external_buttons": {
-            "reject_all": {
-                "id": "hide-cookie-banner"
+            "accept_all": {
+                "id": "Close"
             }
         }
     },
     "afnor.org": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "id": "didomi-notice-learn-more-button"
@@ -481,6 +509,7 @@
         ]
     },
     "agilent.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie Settings",
@@ -526,7 +555,8 @@
             }
         ]
     },
-    "aicpa.org": {
+    "aicpa-cima.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "class": "ot-floating-button__open"
@@ -571,6 +601,8 @@
         ]
     },
     "alz.org": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "accept_all": {
                 "text": "I Understand",
@@ -585,14 +617,25 @@
         }
     },
     "amd.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie Settings",
                 "id": "onetrust-pc-btn-handler"
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Confirm My Choices",
+                "id": null
+            }
+        ]
     },
     "americangirl.com": {
+        "verified": true,
+        "notes": "vile slider internally, banner on top??",
         "external_buttons": {
             "accept_all": {
                 "id": "truste-consent-button",
@@ -606,6 +649,8 @@
         }
     },
     "ampproject.org": {
+        "verified": true,
+        "notes": "no banner seen by me",
         "external_buttons": {
             "accept_all": {
                 "text": "Got it!",
@@ -614,6 +659,8 @@
         }
     },
     "anpc.ro": {
+        "verified": true,
+        "notes": "romanian",
         "external_buttons": {
             "accept_all": {
                 "text": "Acceptă",
@@ -630,6 +677,8 @@
         }
     },
     "answers.com": {
+        "verified": true,
+        "notes": "no banner seen by me",
         "external_buttons": {
             "reject_all": {
                 "text": "Necessary cookies only",
@@ -639,6 +688,8 @@
         }
     },
     "anthropologie.com": {
+        "verified": true,
+        "notes": "onetrust banner hidden in illinois probably", 
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -653,6 +704,9 @@
         }
     },
     "anydesk.com": {
+        "verified": true,
+        "nano": true,
+        "notes": "external buttons here, internal buttons in nano, onetrust",
         "external_buttons": {
             "manage_my_preferences": {
                 "class": "ot-floating-button__open"
@@ -660,6 +714,7 @@
         }
     },
     "aol.de": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Datenschutzeinstellungen verwalten"
@@ -673,6 +728,8 @@
         }
     },
     "ap.org": {
+        "verified": true,
+        "notes": "no banner seen by me, may use onetrust",
         "external_buttons": {
             "accept_all": {
                 "class": "ot-link-btn"
@@ -711,6 +768,8 @@
         ]
     },
     "apc.com": {
+        "verified": true,
+        "notes": "internal buttons done by me, no reject all",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all",
@@ -721,9 +780,19 @@
                 "id": "onetrust-pc-btn-handler",
                 "class": "cookie-setting-link"
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Save",
+                "id": "",
+                "class": "save-preference-btn-handler onetrust-close-btn-handler"
+            }
+        ]
     },
     "applovin.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "id": "onetrust-pc-btn-handler"
@@ -739,6 +808,8 @@
         }
     },
     "appsflyer.com": {
+        "verified": true,
+        "notes": "Onetrust whitelabel, clicked reject all even though not exposed which is cute",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -750,6 +821,8 @@
         }
     },
     "arcadis.com": {
+        "verified": true,
+        "notes": "external fine, internal by me",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Manage my cookies",
@@ -760,9 +833,17 @@
                 "id": "CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll",
                 "class": "cookie-consent__btn-active"
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "reject_all",
+                "element_type": "button",
+                "text": "Use necessary cookies only"
+            }
+        ]
     },
     "arsenal.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Customise",
@@ -816,6 +897,7 @@
         ]
     },
     "aru.ac.uk": {
+        "notes": "Need to include shadow dom detection",
         "external_buttons": {
             "accept_all": {
                 "class": "cta__primary--blue"
@@ -823,6 +905,8 @@
         }
     },
     "asu.edu": {
+        "verified": true,
+        "notes": "has cookie banner, not visible in illinois",
         "external_buttons": {
             "accept_all": {
                 "text": "Ok, I agree",
@@ -831,6 +915,7 @@
         }
     },
     "atlantafed.org": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Proceed",
@@ -839,16 +924,17 @@
         }
     },
     "aut.ac.nz": {
+        "verified": true,
+        "notes": "Not detectable or keyboard focusable, accessibility violation",
         "external_buttons": {
             "accept_all": {
                 "text": "I accept"
-            },
-            "manage_my_preferences": {
-                "class": "cookie-close"
             }
         }
     },
     "auth.gr": {
+        "verified": true,
+        "notes": "greek",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Ρυθμίσεις Cookies"
@@ -859,6 +945,7 @@
         }
     },
     "authy.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "cookie preferences here",
@@ -873,6 +960,8 @@
         }
     },
     "autoweek.com": {
+        "verified": true,
+        "notes": "potential compliance violation? No options",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow all cookies",
@@ -887,6 +976,8 @@
         }
     },
     "avast.com": {
+        "verified": true,
+        "notes": "onetrust, potential violation, no reject option, preselected options even with GPC",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all",
@@ -897,9 +988,18 @@
                 "id": "onetrust-pc-btn-handler",
                 "class": "cookie-setting-link"
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Confirm selection"
+            }
+        ]
     },
     "avira.com": {
+        "verified": true,
+        "notes": "onetrust, potential violation, no reject option, preselected options even with GPC",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Manage...",
@@ -909,6 +1009,8 @@
         }
     },
     "avma.org": {
+        "verified": true,
+        "notes": "no reject",
         "external_buttons": {
             "accept_all": {
                 "text": "OK, I agree"
@@ -916,6 +1018,8 @@
         }
     },
     "awwwards.com": {
+        "verified": true,
+        "notes": "no reject",
         "external_buttons": {
             "accept_all": {
                 "text": "GOT IT"
@@ -923,6 +1027,7 @@
         }
     },
     "axway.com": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Settings",
@@ -977,6 +1082,8 @@
         ]
     },
     "baden-wuerttemberg.de": {
+        "verified": true,
+        "notes": "german, weirdly the external banner is like an internal banner (accept is like confirm)",
         "external_buttons": {
             "accept_all": {
                 "text": "Akzeptieren"
@@ -992,6 +1099,7 @@
         }
     },
     "bahisxbet3.com": {
+        "notes": "blocked, looks sketchy",
         "external_buttons": {
             "reject_all": {
                 "text": "Necessary cookies only",
@@ -1001,6 +1109,8 @@
         }
     },
     "baltimoresun.com": {
+        "verified": true,
+        "notes": "osano, didnt show up when i went but i seen it before",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie Preferences"
@@ -1008,16 +1118,18 @@
         }
     },
     "bedbathandbeyond.com": {
+        "verified": true,
+        "notes": "buttons are right but the site is noncompliant since the banner is not detectable and only accept",
         "external_buttons": {
-            "manage_my_preferences": {
-                "id": "gdpr-container"
-            },
-            "reject_all": {
+            "accept_all": {
                 "id": "gdpr-close"
             }
         }
     },
     "bentley.edu": {
+        "verified": true,
+        "notes": "external buttons here, internal buttons in nano",
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Preferences",
@@ -1030,6 +1142,8 @@
         }
     },
     "bismarcktribune.com": {
+        "verified": true,
+        "notes": "osano, didnt show up but maybe due to gpc",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie Preferences"
@@ -1073,7 +1187,9 @@
             }
         ]
     },
-    "bit.ly": {
+    "bitly.com": {
+        "verified": true,
+        "notes": "Onetrust, no reject, changed url",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All",
