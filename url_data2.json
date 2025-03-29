@@ -1189,7 +1189,8 @@
     },
     "bitly.com": {
         "verified": true,
-        "notes": "Onetrust, no reject, changed url",
+        "notes": "Onetrust, no reject, changed url, internal buttons in nano",
+        "nano": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All",
@@ -1202,6 +1203,7 @@
         }
     },
     "bitcoincasino101.com": {
+        "notes": "blocked, looks sketchy",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -1214,6 +1216,8 @@
         }
     },
     "bitnami.com": {
+        "verified": true,
+        "notes": "perfection, compliant, gpc honored",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookies Settings"
@@ -1258,6 +1262,8 @@
         ]
     },
     "bl.uk": {
+        "verified": true,
+        "notes": "uk site, cute",
         "external_buttons": {
             "accept_all": {
                 "text": "I accept",
@@ -1273,20 +1279,22 @@
         }
     },
     "blizzard.com": {
+        "verified": true,
+        "notes": "onetrust, no reject button",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
                 "id": "accept-recommended-btn-handler",
                 "class": null
             },
-            "reject_all": {
-                "text": "Do Not Sell or Share My Personal Information",
-                "id": "ot-group-id-SSPD_BG",
-                "class": null
+            "manage_my_preferences": {
+                "text": "Cookie Settings"
             }
         }
     },
     "blog4ever.com": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "id": "tarteaucitronPrivacyUrl"
@@ -1331,6 +1339,7 @@
         ]
     },
     "bol.com": {
+        "notes": "blocked",
         "external_buttons": {
             "reject_all": {
                 "text": "Weigeren",
@@ -1344,14 +1353,10 @@
             }
         }
     },
-    "brak.de": {
-        "external_buttons": {
-            "manage_my_preferences": {
-                "id": "cookieman-modal"
-            }
-        }
-    },
     "bricklink.com": {
+        "verified": true,
+        "notes": "no internal only external, use nano",
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookie Settings",
@@ -1361,15 +1366,12 @@
         }
     },
     "brill.com": {
+        "verified": true,
+        "notes": "no reject button, onetrust compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
                 "id": "onetrust-accept-btn-handler",
-                "class": null
-            },
-            "reject_all": {
-                "text": "Reject All",
-                "id": "onetrust-reject-all-handler",
                 "class": null
             },
             "manage_my_preferences": {
@@ -1417,6 +1419,8 @@
         ]
     },
     "bruker.com": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All",
@@ -1425,20 +1429,26 @@
         }
     },
     "bsa.org": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
-            "reject_all": {
+            "accept_all": {
                 "id": "cookie-close"
             }
         }
     },
     "buffalonews.com": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
-            "reject_all": {
+            "accept_all": {
                 "class": "osano-cm-window"
             }
         }
     },
     "businessdailyafrica.com": {
+        "verified": true,
+        "notes": "no banner I saw",
         "external_buttons": {
             "accept_all": {
                 "text": "Ok"
@@ -1450,6 +1460,8 @@
         }
     },
     "businesswire.com": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookies Settings",
@@ -1461,13 +1473,6 @@
             }
         },
         "internal_buttons": [
-            {
-                "option_name": "reject_all",
-                "element_type": "button",
-                "text": "Reject All",
-                "id": "vendor-close-pc-btn-handler",
-                "class": "button-theme"
-            },
             {
                 "option_name": "accept_all",
                 "element_type": "button",
@@ -1499,13 +1504,16 @@
         ]
     },
     "buydomains.com": {
+        "verified": true,
+        "nano": true,
+        "notes": "no reject button externally, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Got It",
                 "id": "onetrust-accept-btn-handler",
                 "class": "None"
             },
-            "reject_all": {
+            "manage_my_preferences": {
                 "text": "Cookie Settings",
                 "id": "onetrust-pc-btn-handler",
                 "class": "cookie-setting-link"
@@ -1513,15 +1521,11 @@
         }
     },
     "caesars.com": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All Cookies",
                 "id": "onetrust-accept-btn-handler",
-                "class": null
-            },
-            "reject_all": {
-                "text": "Clear",
-                "id": "clear-filters-handler",
                 "class": null
             },
             "manage_my_preferences": {
@@ -1531,13 +1535,6 @@
             }
         },
         "internal_buttons": [
-            {
-                "option_name": "reject_all",
-                "element_type": "button",
-                "text": "Cookie Settings",
-                "id": "onetrust-pc-btn-handler",
-                "class": ""
-            },
             {
                 "option_name": "accept_all",
                 "element_type": "button",
