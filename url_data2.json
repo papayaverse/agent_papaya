@@ -230,7 +230,7 @@
             }
         }
     },
-    "accorhotels.com": {
+    "all.accor.com": {
         "verified": true,
         "nano": true,
         "external_buttons": {
@@ -1566,6 +1566,8 @@
         ]
     },
     "canneslions.com": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookies Settings",
@@ -1579,13 +1581,6 @@
             }
         },
         "internal_buttons": [
-            {
-                "option_name": "reject_all",
-                "element_type": "button",
-                "text": "Reject All",
-                "id": "onetrust-accept-btn-handler",
-                "class": "button"
-            },
             {
                 "option_name": "accept_all",
                 "element_type": "button",
