@@ -1612,6 +1612,8 @@
         ]
     },
     "capgemini.com": {
+        "verified": true,
+        "notes": "only if you click cookie settings does it show up, compliance violation?",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -1631,20 +1633,19 @@
         }
     },
     "caravanclub.co.uk": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
                 "id": "ccc-notify-accept",
                 "class": "ccc-notify-button ccc-link ccc-tabbable ccc-accept-button"
-            },
-            "reject_all": {
-                "text": "N/A",
-                "id": "N/A",
-                "class": "N/A"
             }
         }
     },
     "catchthemes.com": {
+        "verified": true,
+        "notes": "There's an |are you sure| kind of modal which is super dark pattern, and it doesnt go away. What even is this banner?",
         "external_buttons": {
             "reject_all": {
                 "text": "Do not sell my personal information",
@@ -1654,6 +1655,8 @@
         }
     },
     "ceicdata.com": {
+        "verified": true,
+        "notes": "didnt see it here",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -1668,6 +1671,7 @@
         }
     },
     "chicagobooth.edu": {
+        "verified": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Manage My Cookies",
@@ -1714,6 +1718,8 @@
         ]
     },
     "chroniclelive.co.uk": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all cookies",
@@ -1728,6 +1734,8 @@
         }
     },
     "churchofjesuschrist.org": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all cookies",
@@ -1737,6 +1745,8 @@
         }
     },
     "cigna.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Confirm My Choices",
@@ -1751,26 +1761,31 @@
         }
     },
     "cisco.com": {
+        "verified": true, 
+        "notes": "no reject button, compliance violation, only manage in external", 
         "external_buttons": {
-            "accept_all": {
-                "text": "Allow All",
-                "id": "accept-recommended-btn-handler"
-            },
             "manage_my_preferences": {
                 "text": "Change Settings"
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "accept_all",
+                "text": "Allow All",
+                "id": "accept-recommended-btn-handler"
+            },
+            {
+                "option_name": "confirm_my_preferences",
+                "text": "Save settings"
+            }
+        ]
     },
     "cision.com": {
+        "verified": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
                 "id": "onetrust-accept-btn-handler",
-                "class": null
-            },
-            "reject_all": {
-                "text": "Reject All",
-                "id": "onetrust-reject-all-handler",
                 "class": null
             },
             "manage_my_preferences": {
@@ -1778,9 +1793,23 @@
                 "id": "onetrust-pc-btn-handler",
                 "class": null
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "accept_all",
+                "element_type": "button",
+                "text": "Accept All"
+            },
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Save Preferences"
+            }
+        ]
     },
     "cityam.com": {
+        "verified": true,
+        "nano": true,
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all",
@@ -1795,20 +1824,13 @@
         }
     },
     "clickondetroit.com": {
-        "external_buttons": {
-            "accept_all": {
-                "text": "Accept all cookies",
-                "id": "None",
-                "class": "None"
-            },
-            "reject_all": {
-                "text": "Necessary cookies only",
-                "id": "None",
-                "class": "None"
-            }
-        }
+        "verified": true,
+        "notes": "osano, no buttons, only X and disappears anyway",
+        "external_buttons": {}
     },
-    "cloudflare.net": {
+    "cloudflare.com": {
+        "verified": true,
+        "notes": "onetrust, doesnt show banner if gpc",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject All But Necessary",
@@ -1816,21 +1838,32 @@
             }
         }
     },
-    "cloudimg.io": {
+    "cloudimage.io": {
+        "verified": true,
+        "notes": "onetrust cookiepro, no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
                 "id": "onetrust-accept-btn-handler",
                 "class": null
             },
-            "reject_all": {
+            "manage_my_preferences": {
                 "text": "Cookie Settings",
                 "id": "onetrust-pc-btn-handler",
                 "class": null
             }
-        }
+        },
+        "internal_buttons": [
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Confirm My Choices"
+            }
+        ]
     },
     "cmegroup.com": {
+        "verified": true,
+        "notes": "onetrust, no reject button visible, compliance violation however it is clickable which is strange",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -1850,6 +1883,8 @@
         }
     },
     "cmha.ca": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -1864,6 +1899,8 @@
         }
     },
     "codemasters.com": {
+        "verified": false,
+        "notes": "i didnt see banner but like ea.com has one",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -1878,6 +1915,8 @@
         }
     },
     "codeproject.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Decline",
@@ -1892,6 +1931,8 @@
         }
     },
     "collegeboard.com": {
+        "verified": false,
+        "notes": "i didnt see banner, but there definitely is one but its hidden",
         "external_buttons": {
             "reject_all": {
                 "text": "reject_all",
@@ -1906,6 +1947,9 @@
         }
     },
     "comcast.net": {
+        "verified": false,
+        "nano": true,
+        "notes": "now xfinity.com but see nano result",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All",
@@ -1922,6 +1966,8 @@
         }
     },
     "comicbook.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Save Settings",
@@ -1936,6 +1982,9 @@
         }
     },
     "comicvine.com": {
+        "verified": false,
+        "notes": "now comicvine.gamespot.com, check nano",
+        "nano": true,
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -1950,6 +1999,8 @@
         }
     },
     "commonsense.org": {
+        "verified": false,
+        "notes": "banner doesnt show up in illinois, only manage and confirm",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all cookies",
@@ -1959,20 +2010,19 @@
         }
     },
     "commonwealthfund.org": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
                 "id": null,
                 "class": "cookie-banner__button"
-            },
-            "reject_all": {
-                "text": "Reject",
-                "id": null,
-                "class": "None"
             }
         }
     },
     "comodo.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "",
@@ -1992,6 +2042,8 @@
         }
     },
     "computerbase.de": {
+        "verified": true,
+        "notes": "this is a clear compliance violation as it allows you to reject but you have to accept to access the site its so weird",
         "external_buttons": {
             "accept_all": {
                 "text": "Akzeptieren und weiter",
@@ -2006,20 +2058,25 @@
         }
     },
     "cookieyes.com": {
+        "verified": true,
+        "notes": "compliance violation as it requires me to \\do not sell and share\\ even though I used GPC signal what a fraud",
         "external_buttons": {
-            "accept_all": {
-                "text": "Scan website",
-                "id": "scan_now",
-                "class": "btn blue-btn"
-            },
-            "reject_all": {
-                "text": "N/A",
-                "id": "N/A",
-                "class": "N/A"
+            "manage_my_preferences": {
+                "text": "Do Not Sell Or Share My Personal Information"
             }
-        }
+        },
+        "internal_buttons" : [
+            {
+                "option_name": "confirm_my_preferences",
+                "element_type": "button",
+                "text": "Save My Preferences"
+            }
+        ]
     },
     "corsair.com": {
+        "verified": true,
+        "notes": "onetrust, no reject button, compliance violation",
+        "nano": true,
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Do Not Sell My Personal Information",
@@ -2039,6 +2096,8 @@
         }
     },
     "courant.com": {
+        "verified": true,
+        "notes": "osane, respects gpc, no reject button",
         "external_buttons": {
             "accept_all": {
                 "text": "Cookie Consent Banner",
@@ -2053,6 +2112,8 @@
         }
     },
     "coursera.org": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -2067,9 +2128,14 @@
         }
     },
     "cpanel.net": {
+        "verified": true,
+        "notes": "okay",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow all"
+            },
+            "reject_all": {
+                "text": "Deny"
             }
         }
     },

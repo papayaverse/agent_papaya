@@ -140,8 +140,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     const domain = message.domain;
     // Wait for the button data to be loaded before responding
     buttonDataPromise.then(() => {
-      sendResponse(buttonData[domain]); // change
-      //sendResponse(null); // change
+      //sendResponse(buttonData[domain]); // change
+      sendResponse(null); // change
     }).catch(error => {
       console.error('Error sending button data:', error);
       sendResponse({});
