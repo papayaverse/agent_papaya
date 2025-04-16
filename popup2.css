@@ -195,3 +195,48 @@ input[type="radio"] {
   border-top: 1px solid #444; /* Adds a separator line */
   pointer-events: none; /* Ensures it’s unclickable */
 }
+
+#dashboard h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+#dashboard button {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  width: fit-content;
+  margin: 6px 0;
+  box-shadow: none;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+#dashboard button:hover {
+  transform: scale(1.02);
+}
+
+#dashboard #changeCookiePreferences {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  margin-left: 10px;
+}
+
+#dashboard #reportIssue {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+  margin-left: 10px;
+}
+
+#dashboard p i {
+  display: block;
+  margin-bottom: 4px;
+}
+
+#dashboard hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}

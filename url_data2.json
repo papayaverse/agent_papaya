@@ -2140,6 +2140,8 @@
         }
     },
     "creativethemes.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Necessary cookies only",
@@ -2149,6 +2151,8 @@
         }
     },
     "criteo.com": {
+        "verified": true,
+        "notes": "onetrust, no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -2157,6 +2161,8 @@
         }
     },
     "crucial.com": {
+        "verified": true,
+        "notes": "perfect",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept All Cookies",
@@ -2213,6 +2219,8 @@
         ]
     },
     "cyprus-mail.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2227,6 +2235,8 @@
         }
     },
     "dailyhive.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2241,6 +2251,8 @@
         }
     },
     "dailymotion.com": {
+        "verified": true,
+        "notes": "no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "I understand",
@@ -2250,6 +2262,8 @@
         }
     },
     "dailyrecord.co.uk": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2264,6 +2278,8 @@
         }
     },
     "davidsbridal.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Cookies Settings",
@@ -2320,6 +2336,8 @@
         ]
     },
     "dazeddigital.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2334,43 +2352,34 @@
         }
     },
     "dc.com": {
+        "verified": true,
+        "notes": "There is a cookie banner but with no buttons, only a link to the privacy policy",
         "external_buttons": {
-            "reject_all": {
-                "text": "Clear",
-                "id": "clear-filters-handler",
-                "class": null
-            },
-            "accept_all": {
-                "text": "Apply",
-                "id": "filter-apply-handler",
-                "class": null
-            }
         }
     },
     "dcist.com": {
+        "verified": true,
+        "notes": "only ok button, no reject button, compliance violation",
         "external_buttons": {
-            "reject_all": {
+            "accept_all": {
                 "text": "OK",
                 "id": null,
                 "class": "mgbutton moove-gdpr-infobar-allow-all gdpr-fbo-0"
-            },
-            "accept_all": {
-                "text": null,
-                "id": null,
-                "class": "moove-gdpr-info-bar-content"
             }
         }
     },
     "deere.com": {
+        "verified": true,
+        "notes": "no banner, only link at bottom of page",
         "external_buttons": {
-            "reject_all": {
-                "text": "Necessary cookies only",
-                "id": "onetrust-reject-all-handler",
-                "class": null
+            "manage_my_preferences": {
+                "text": "Cookie Preferences"
             }
         }
     },
     "delfi.lv": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "id": "cookiescript_manageicon"
@@ -2381,13 +2390,13 @@
         }
     },
     "denon.com": {
+        "verified": true,
+        "notes": "onetrust, no reject button, compliance violation",
         "external_buttons": {
-            "manage_my_preferences": {
-                "text": "Privacy Policy & Cookie Notice",
-                "id": "onetrust-pc-btn-handler",
-                "class": "None"
+            "accept_all": {
+                "text": "Accept"
             },
-            "reject_all": {
+            "manage_my_preferences": {
                 "text": "Do Not Sell My Information",
                 "id": "onetrust-pc-btn-handler",
                 "class": "None"
@@ -2432,29 +2441,25 @@
         ]
     },
     "designboom.com": {
+        "verified": true,
+        "notes": "custom implementation, no reject button, compliance violation",
         "external_buttons": {
             "accept_all": {
                 "text": "accept all",
                 "id": "db-cn-policy-dismiss",
                 "class": "bck-half bck-half-yellow"
-            },
-            "reject_all": {
-                "text": "Necessary cookies only",
-                "id": "None",
-                "class": "None"
             }
         }
     },
     "devex.com": {
+        "verified": true,
+        "notes": "There is a cookie banner but with no buttons, only a link to the privacy policy",
         "external_buttons": {
-            "reject_all": {
-                "text": "Necessary cookies only",
-                "id": "onetrust-reject-all-handler",
-                "class": "None"
-            }
         }
     },
     "dg-datenschutz.de": {
+        "verified": true,
+        "notes": "german, very good!",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject All / Alle Ablehnen",
@@ -2469,6 +2474,8 @@
         }
     },
     "dickblick.com": {
+        "verified": false,
+        "nano": true,
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all cookies",
@@ -2478,6 +2485,8 @@
         }
     },
     "dictionary.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2492,6 +2501,8 @@
         }
     },
     "digicert.com": {
+        "verified": false,
+        "notes": "shadow dom need to fix",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -2500,6 +2511,8 @@
         }
     },
     "digitalocean.com": {
+        "verified": true,
+        "notes": "truste, no reject button, compliance violation, internal banner in iframe, respects gpc but doesnt tell me",
         "external_buttons": {
             "manage_my_preferences": {
                 "text": "Manage Choices",
@@ -2512,12 +2525,9 @@
         }
     },
     "dilbert.com": {
+        "verified": true,
+        "notes": "godaddy airo, only accept, compliance violation",
         "external_buttons": {
-            "reject_all": {
-                "text": "N/A",
-                "id": "N/A",
-                "class": "N/A"
-            },
             "accept_all": {
                 "text": "Accept",
                 "id": "ce0023de-5362-4bc9-a315-8b7a024d9099-accept",
@@ -2526,6 +2536,8 @@
         }
     },
     "discord.com": {
+        "verified": false,
+        "notes": "i didnt see banner, but there definitely is one but its hidden",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept all cookies",
@@ -2540,6 +2552,8 @@
         }
     },
     "discover.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Reject all cookies",
@@ -2554,6 +2568,8 @@
         }
     },
     "divx.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "ACCEPT",
@@ -2608,6 +2624,8 @@
         ]
     },
     "dn.no": {
+        "verified": true,
+        "notes": "perfect",
         "external_buttons": {
             "accept_all": {
                 "text": "Jeg godtar",
@@ -2627,6 +2645,8 @@
         }
     },
     "dnnsoftware.com": {
+        "verified": true,
+        "notes": "only accept and reject",
         "external_buttons": {
             "reject_all": {
                 "text": "Decline",
@@ -2639,6 +2659,8 @@
         }
     },
     "donorbox.org": {
+        "verified": true,
+        "notes": "perfect",
         "external_buttons": {
             "reject_all": {
                 "text": "Use only necessary cookies",
@@ -2653,6 +2675,8 @@
         }
     },
     "drugstore.com": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "accept_all": {
                 "text": "Allow All",
@@ -2666,7 +2690,9 @@
             }
         }
     },
-    "dsm.com": {
+    "dsm-firmenich.com": {
+        "verified": true,
+        "notes": "blocked, looks sketchy",
         "external_buttons": {
             "accept_all": {
                 "text": "Accept",
@@ -2686,6 +2712,8 @@
         }
     },
     "dwd.de": {
+        "verified": false,
+        "notes": "i didnt see banner",
         "external_buttons": {
             "reject_all": {
                 "text": "Hier klicken, um den Social-Media-Dienst wieder abzuschalten.",

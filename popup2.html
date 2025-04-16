@@ -13,46 +13,41 @@
   </div>  
   <div class="container">
     <div class="sidebar">
-      <div class="sidebar-item" id="currentSiteLink" aria-label="Go to Current Site">Current Site</div>
-      <div class="sidebar-item" id="statsLink" aria-label="View Stats">Stats</div>
-      <p class="sidebar-heading">Settings</p> <!-- Unclickable Settings Header -->
-      <div class="sidebar-item" id="cookiePreferencesLink" aria-label="Manage Cookie Preferences">Cookies</div>
-      <div class="sidebar-item" id="gpcLink" aria-label="Manage Trackers">Trackers</div>
-      <div class="sidebar-item" id="updatesLink" aria-label="View Updates">Updates</div>
+        <div class="sidebar-item" id="dashboardLink" aria-label="View Dashboard">Dashboard</div>
+        <p class="sidebar-heading">Settings</p>
+        <div class="sidebar-item" id="cookiePreferencesLink" aria-label="Manage Cookie Preferences">Cookies</div>
+        <div class="sidebar-item" id="gpcLink" aria-label="Manage Trackers">Trackers</div>
+        <div class="sidebar-item" id="updatesLink" aria-label="View Updates">Updates</div>
     </div>    
     <div class="content" id="content">
-      <div id="currentSite" class="tab-content">
-        <h2>Current Website</h2>
-        <p id="currentSiteInfo">No Cookie Banner found</p>
-        <p> -------------------------------------- </p>
-        <p><i> Don't like what you see? </i></p>
-        <p>
-          <i>
-            <a href="#" id="changeCookiePreferences" style="color: blue; text-decoration: underline; cursor: pointer;">
-              Change your cookie preferences.
-            </a>
-          </i>
-        </p>
-        <p>
-          <i>
-            <a href="#" id="reportIssue" style="color: red; text-decoration: underline; cursor: pointer;">
-              Report a wrong button being clicked.
-            </a>
-          </i>
-        </p>
-      </div>
+      <div id="dashboard" class="tab-content">
+        <h2>Dashboard</h2>
+        <hr> </hr>
+        <!-- CURRENT SITE SECTION -->
+        <section id="currentSiteSection">
+          <h3>🔍 Current Website</h3>
+          <b><p id="currentSiteInfo">No Cookie Banner found</p></b>
+          <p><i>Don't like what you see?</i></p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="changeCookiePreferences">Cookie Preferences</button>
+            <button id="reportIssue">Report Wrong Button</button>
+          </div>
 
-      <div id="stats" class="tab-content" style="display: none;">
-        <h2>Stats</h2>
-        <p><b>Agent Papaya</b> has handled:</p>
-        <p id="totalClicks"><b>0</b> Cookie Banners on</p>
-        <p id="uniqueSites"><b>0</b> Unique Websites</p>
-      
-        <button id="toggleSitesButton" aria-expanded="false">Show All Sites ▼</button>
-        <div id="clickedSitesList" style="display: none;">
-          <p>Loading...</p>
-        </div>
+        </section>
+        <hr> </hr>
+        <!-- STATS SECTION -->
+        <section id="statsSection">
+          <h3>📊 Overall Stats</h3>
+          <p><b>Agent Papaya</b> has handled:</p>
+          <p id="totalClicks"><b>0</b> Cookie Banners on</p>
+          <p id="uniqueSites"><b>0</b> Unique Websites</p>
+          <button id="toggleSitesButton" aria-expanded="false">Show All Sites ▼</button>
+          <div id="clickedSitesList" style="display: none;">
+            <p>Loading...</p>
+          </div>
+        </section>
       </div>
+      
       
       <div id="updates" class="tab-content" style="display: none;">
         <h2>Updates</h2>

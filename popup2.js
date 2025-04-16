@@ -23,14 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
     return domainParts.slice(-2).join('.');
   }
 
+  document.getElementById('dashboardLink').addEventListener('click', function () {
+    showTab('dashboard');
+  });
   
-    document.getElementById('currentSiteLink').addEventListener('click', function() {
-      showTab('currentSite');
-    });
-  
-    document.getElementById('statsLink').addEventListener('click', function() {
-      showTab('stats');
-    });
+  // Set "Dashboard" as default tab on load
+    showTab('dashboard');
   
     document.getElementById('cookiePreferencesLink').addEventListener('click', function() {
       showTab('cookiePreferences');
@@ -61,9 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
         chrome.runtime.sendMessage({ action: 'flushData', domain: currentDomain });
       });
     }
-  
-    // Initialize first tab
-    showTab('currentSite');
 
 
   const sitesList = document.getElementById('clickedSitesList');
