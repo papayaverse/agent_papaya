@@ -116,7 +116,7 @@ let sessionPromise = null;
 // Function to get or create a Gemini Nano session
 function getGeminiNanoSession() {
   if (!sessionPromise) {
-    somePromise = chrome.aiOriginTrial.languageModel.capabilities().then((result) => {console.log("Do AI capabilities exist?", result)});
+    //somePromise = chrome.aiOriginTrial.languageModel.capabilities().then((result) => {console.log("Do AI capabilities exist?", result)});
     sessionPromise = chrome.aiOriginTrial.languageModel.create({
       systemPrompt: "You are a friendly, helpful assistant specialized in detecting buttons corresponding to options such as 'accept_all', 'reject_all', 'manage_preferences', etc. in cookie consent banners.",
     }).then((newSession) => {
