@@ -56,7 +56,7 @@
             "accept_all": {
                 "id": "cn-accept-cookie"
             },
-            "manage_my_preferences": {
+            "policy": {
                 "text": "Cookie Policy"
             }
         }
