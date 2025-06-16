@@ -18,8 +18,9 @@
     .bubble.agent { background: #ffefd6; color: #333; border-bottom-left-radius: 4px; }
     .bubble.user { background: #ff7d10; color: #fff; border-bottom-right-radius: 4px; }
     .chat-input-row { display: flex; padding: 12px; border-top: 1px solid #eee; background: #fffbe9; }
-    .chat-input { flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 1em; }
-    .send-btn { background: #ff7d10; color: #fff; border: none; border-radius: 8px; padding: 0 18px; margin-left: 8px; font-size: 1em; cursor: pointer; transition: background 0.2s; }
+    .chat-input { flex: 1 1 auto; padding: 10px; border-radius: 8px; border: 1px solid #ddd; font-size: 1em; min-width: 0; }
+    .send-btn { background: #ff7d10; color: #fff; border: none; border-radius: 8px; padding: 0 10px; margin-left: 8px; font-size: 1em; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; height: 40px; width: 40px; min-width: 40px; }
+    .send-btn svg { display: block; }
     .send-btn:hover { background: #ff9d3c; }
   </style>
 </head>
@@ -32,7 +33,9 @@
     <div class="chat-history" id="chatHistory"></div>
     <form class="chat-input-row" id="chatForm">
       <input type="text" class="chat-input" id="chatInput" placeholder="Chat with Agent Papaya" autocomplete="off" />
-      <button type="submit" class="send-btn">Send</button>
+      <button type="submit" class="send-btn" aria-label="Send">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+      </button>
     </form>
   </div>
   <script src="popup_chat.js"></script>
