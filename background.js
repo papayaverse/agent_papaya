@@ -131,6 +131,27 @@ function getGeminiNanoSession() {
   return sessionPromise;
 }
 
+let agentSessionPromise = null;
+// Function to get or create a Gemini Nano session
+function getAgentGeminiNanoSession(context = null) {
+  if (!agentSessionPromise) {
+    let systemPrompt = "You are Agent Papaya, a friendly, helpful privacy companion specialized in helping users manage their online privacy. Your user gives you their preferences and you execute them online by automatically clicking cookie banners for them and also setting the GPC signal";
+    if (context) {
+      systemPrompt = systemPrompt + "\n\n" + context;
+    }
+    agentSessionPromise = chrome.aiOriginTrial.languageModel.create({
+      systemPrompt: systemPrompt,
+    }).then((newSession) => {
+      console.log("Gemini Nano session created:", newSession);
+      return newSession;
+    }).catch((error) => {
+      console.error("Failed to create Gemini Nano session:", error.message);
+      agentSessionPromise = null; // Reset so it can retry later
+      throw error;
+    });
+  }
+  return agentSessionPromise;
+}
 
 
 
@@ -185,6 +206,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   return true; // Respond asynchronously
   } else if (message.type === "usePrompt") {
     getGeminiNanoSession()
+      .then((session) => session.prompt(message.prompt))
+      .then((result) => sendResponse({ success: true, result }))
+      .catch((error) => sendResponse({ success: false, error: error.message }));
+    return true; // Respond asynchronously
+  } else if (message.type === "usePromptAgent") {
+    getAgentGeminiNanoSession(message.history)
       .then((session) => session.prompt(message.prompt))
       .then((result) => sendResponse({ success: true, result }))
       .catch((error) => sendResponse({ success: false, error: error.message }));
