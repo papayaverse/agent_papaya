@@ -240,3 +240,55 @@ input[type="radio"] {
   border-top: 1px solid #ccc;
   margin: 10px 0;
 }
+
+/* FAQ Button Styles */
+.faq-buttons-container {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: flex-start; /* Align buttons to the start of the container */
+  padding: 10px 0; /* Add some padding around the buttons */
+  margin-left: 10px; /* Align with chat bubble indentation */
+}
+
+.faq-button {
+  background-color: #e9e9eb; /* Light grey background */
+  color: #333; /* Darker text for contrast */
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 15px; /* More rounded corners for a button/pill look */
+  padding: 8px 15px; /* Comfortable padding */
+  margin-bottom: 8px; /* Space between buttons */
+  cursor: pointer;
+  font-size: 0.85em; /* Slightly smaller font than main chat text */
+  text-align: left; /* Align text to the left */
+  width: auto; /* Fit content width */
+  display: inline-block; /* Allow width to fit content */
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* Subtle shadow */
+}
+
+.faq-button:hover {
+  background-color: #dcdce0; /* Slightly darker on hover */
+  transform: translateY(-1px); /* Slight lift on hover */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
+}
+
+.faq-button:focus {
+  outline: 2px solid #ff7d10; /* Papaya orange focus outline */
+  outline-offset: 2px;
+}
+
+.message-bubble p,
+.message-content {
+    font-size: 18px; /* Example: Set font size to 18px */
+    line-height: 1.6; /* Example: Set line height to 1.6 for better readability */
+}
+
+/* Ensure the FAQ buttons don't disrupt the chat message flow if they are inside a .chat-message div */
+.chat-message .faq-buttons-container {
+    margin-left: 0; /* Reset margin if nested, rely on bubble padding */
+    padding: 5px 0; /* Adjust padding if needed */
+}
+
+.chat-message.agent .faq-buttons-container {
+    align-items: flex-start; /* Align with agent bubble */
+}

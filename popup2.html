@@ -5,6 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Papaya CookieMonster</title>
   <link rel="stylesheet" href="popup2.css">
+  <style>
+    /* Styles from popup_chat.html, potentially with adjustments */
+    .chat-container-wrapper { /* New wrapper for chat in dashboard */
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 40px); /* Adjust height as needed, considering h2 and hr */
+        background: #fff;
+        border-radius: 8px; /* Consistent with other elements */
+        box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        margin-top: 10px; /* Space from h2 */
+    }
+    .chat-history {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #fffbe9; /* Match body background or a light chat-specific bg */
+        border-radius: 8px 8px 0 0; /* Rounded top corners */
+    }
+    .chat-message { margin-bottom: 16px; display: flex; }
+    .chat-message.agent { justify-content: flex-start; }
+    .chat-message.user { justify-content: flex-end; }
+    .bubble { max-width: 75%; padding: 10px 14px; border-radius: 16px; font-size: 1.1em; line-height: 1.4; }
+    .bubble.agent { background: #ffefd6; color: #333; border-bottom-left-radius: 4px; }
+    .bubble.user { background: #ff7d10; color: #fff; border-bottom-right-radius: 4px; }
+    .chat-input-row {
+        display: flex;
+        padding: 10px;
+        border-top: 1px solid #eee;
+        background: #fff; /* Cleaner background for input area */
+        border-radius: 0 0 8px 8px; /* Rounded bottom corners */
+    }
+    .chat-input {
+        flex: 1 1 auto;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-size: 1em;
+        min-width: 0;
+    }
+    .send-btn {
+        background: #ff7d10;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0 10px;
+        margin-left: 8px;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px; /* Adjusted height */
+        width: 38px;  /* Adjusted width */
+        min-width: 38px;
+    }
+    .send-btn svg { display: block; width: 20px; height: 20px; }
+    .send-btn:hover { background: #ff9d3c; }
+    /* Ensure tab-content takes up available space if chat is inside it */
+    .tab-content {
+        height: 100%;
+        display: flex; /* if we want to control child height */
+        flex-direction: column; /* if we want to control child height */
+    }
+    #dashboard.tab-content {
+      padding-bottom: 0; /* Remove padding if chat has its own */
+    }
+  </style>
 </head>
 <body>
   <div class="top-bar">
@@ -13,39 +81,24 @@
   </div>  
   <div class="container">
     <div class="sidebar">
-        <div class="sidebar-item" id="dashboardLink" aria-label="View Dashboard">Dashboard</div>
+        <div class="sidebar-item" id="dashboardLink" aria-label="Chat with Agent Papaya">Chat</div>
         <p class="sidebar-heading">Settings</p>
         <div class="sidebar-item" id="cookiePreferencesLink" aria-label="Manage Cookie Preferences">Cookies</div>
-        <div class="sidebar-item" id="gpcLink" aria-label="Manage Trackers">Trackers</div>
+        <div class="sidebar-item" id="gpcLink" aria-label="Manage Trackers">Trackers (GPC)</div>
         <div class="sidebar-item" id="updatesLink" aria-label="View Updates">Updates</div>
     </div>    
     <div class="content" id="content">
-      <div id="dashboard" class="tab-content">
-        <h2>Dashboard</h2>
-        <hr> </hr>
-        <!-- CURRENT SITE SECTION -->
-        <section id="currentSiteSection">
-          <h3>🔍 Current Website</h3>
-          <b><p id="currentSiteInfo">No Cookie Banner found</p></b>
-          <p><i>Don't like what you see?</i></p>
-          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button id="changeCookiePreferences">Cookie Preferences</button>
-            <button id="reportIssue">Report Wrong Button</button>
-          </div>
-
-        </section>
-        <hr> </hr>
-        <!-- STATS SECTION -->
-        <section id="statsSection">
-          <h3>📊 Overall Stats</h3>
-          <p><b>Agent Papaya</b> has handled:</p>
-          <p id="totalClicks"><b>0</b> Cookie Banners on</p>
-          <p id="uniqueSites"><b>0</b> Unique Websites</p>
-          <button id="toggleSitesButton" aria-expanded="false">Show All Sites ▼</button>
-          <div id="clickedSitesList" style="display: none;">
-            <p>Loading...</p>
-          </div>
-        </section>
+      <div id="dashboard" class="tab-content" style="height: 500px; /* Or manage height via flex */">
+        <!-- Chat interface will go here -->
+        <div class="chat-container-wrapper">
+          <div class="chat-history" id="chatHistory"></div>
+          <form class="chat-input-row" id="chatForm">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Chat with Agent Papaya" autocomplete="off" />
+            <button type="submit" class="send-btn" aria-label="Send">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
       </div>
       
       
@@ -59,8 +112,8 @@
 
       
       <div id="cookiePreferences" class="tab-content" style="display: none;">
-        <h2>CookieMonster</h2>
-        <p><b>CookieMonster</b> is our AI tool that helps you manage your cookie preferences.</p>
+        <h2>Cookie Preferences</h2>
+        <p><b>Agent Papaya</b> helps you manage your cookie preferences and will click your preference on every website it can</p>
         <p>Set your preferences below:</p>
         
         <label>
@@ -81,29 +134,14 @@
         
         <button id="savePreferences">Save Preferences</button>
       </div>      
-      <div id="payback" class="tab-content" style="display: none;">
-        <h2>Payback with Carica</h2>
-        <p>
-          <b>Your Data Your Choice!</b>
-        </p>
-        <p>
-          <b>Carica</b> is our ethical data marketplace that allows you to sell your data to companies, according to preferences set by you.
-        </p>
-        <p>
-          Companies will only ever see what you are comfortable with sharing.
-        </p>
-        <p>
-          And, you can get <b>Paid Back</b>, earning money by selling your data to companies.
-        </p>
-        <p><a href="https://papayaverse.github.io/payback_samples/" class="btn" target="_blank">Preview</a></p>
-      </div>
+      
       <div id="gpc" class="tab-content" style="display: none;">
         <h2>Trackers</h2>
         <label class="switch">
           <input type="checkbox" id="gpcToggle">
           <span class="slider round"></span>
       </label>
-      <p id="gpcStatus">Global Privacy Control is OFF</p>
+      <p id="gpcStatus">Global Privacy Control is <b>Enabled</b></p>
         <p> 
           <b>Trackers</b> can be used to collect data about your browsing habits and preferences.
           They can be used to track your online activity and collect data about your browsing habits and preferences.
@@ -116,6 +154,6 @@
     </div>
   </div>
 
-  <script src="popup2.js"></script>
+  <script src="popup_chat.js"></script>
 </body>
 </html>

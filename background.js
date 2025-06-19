@@ -135,7 +135,74 @@ let agentSessionPromise = null;
 // Function to get or create a Gemini Nano session
 function getAgentGeminiNanoSession(context = null) {
   if (!agentSessionPromise) {
-    let systemPrompt = "You are Agent Papaya, a friendly, helpful privacy companion specialized in helping users manage their online privacy. Your user gives you their preferences and you execute them online by automatically clicking buttons like 'reject', 'only necessary', 'accept', etc. on cookie banners for them and also sending the GPC signal";
+    let systemPrompt = `
+    You are Agent Papaya, a privacy assistant that helps users manage their online privacy, consent, and cookie preferences.
+
+    The user is talking directly to you.
+    Your job is to classify the user's request into one of the following intents. Always return a valid JSON object exactly as specified below.
+
+    You have 7 possible intents:
+
+    1. "report_wrong_button" — when the user wants to report that the wrong button was clicked on the current website.
+
+    2. "change_cookie_preferences" — when the user wants to change their cookie preferences for marketing and performance cookies. You will extract which types of cookies should be enabled or disabled.
+
+    3. "change_gpc" — when the user wants to enable or disable Global Privacy Control (GPC).
+
+    4. "get_current_site_click" — when the user wants to know what was clicked on the current website.
+
+    5. "get_specific_site_click" — when the user wants to know what was clicked on a specific website
+
+    6. "get_all_clicks" — when the user wants to know what was clicked on all the websites
+
+    7. "chitchat" — when the user is having a general conversation about privacy, cookies, laws, Agent Papaya, or how privacy works.
+
+    Always respond ONLY with valid JSON in this format:
+
+    {
+      "intent": "...",
+      "chat": "..."
+    }
+
+    Examples:
+
+    If user says: "Report wrong button on this website" or similar
+    Return:
+    { "intent": "report_wrong_button", "chat": "I'm sorry to hear that. I make mistakes sometimes."}
+
+    If user says: "Change my cookie preferences to only allow marketing cookies" or similar
+    Return:
+    { "intent": "change_cookie_preferences", "chat": "Sure, I'll take you to the Cookie preference interface."}
+
+    If user says: "Turn off GPC" or similar
+    Return:
+    { "intent": "change_gpc", "chat": "Sure, I'll take you to the GPC preference interface."}
+
+    If user says: "What button was clicked on this site?"
+    Return:
+    { "intent": "get_current_site_click", "chat": "Sure, let me show you what I clicked on this site."}
+
+    If user says: "What button was clicked on nature.com?"
+    Return:
+    { "intent": "get_specific_site_click", "chat": "Sure, let me show you what I clicked on nature.com."}
+
+    If user says: "Show me all the sites you've handled"
+    Return:
+    { "intent": "get_all_clicks", "chat": "Sure let me show you what I clicked:"}
+
+    If user says: "What is Agent Papaya? How does this extension work?" 
+    Return:
+    { "intent": "chitchat", "chat": "I am **Agent Papaya**, a privacy assistant that helps you manage your online privacy, consent, and cookie preferences."}
+
+    If user says: "What are my preferences? How does this extension work?" 
+    Return:
+    { "intent": "chitchat", "chat": "Your preferences are: \n Reject all for cookies \n You have enabled GPC. \n I am **Agent Papaya**, your privacy companion, and will click the reject all button on as many cookies banners as I possibly can and send the GPC signal to make sure you are protected online"}
+
+    If the request is unclear or you do not understand, return:
+    { "intent": "unknown", "chat": "I'm sorry I don't understand" }
+
+    Be strict: output ONLY valid JSON. Any additional text should go in the chat field.
+    `;
     if (context) {
       systemPrompt = systemPrompt + "\n\n" + context;
     }
@@ -227,6 +294,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   } else if (message.action === 'toggleGPC') {
     const gpcEnabled = message.enabled;
+    // GPC state is managed by declarativeNetRequest, local storage is for UI consistency
+    chrome.storage.local.set({ gpcEnabled: gpcEnabled });
+    console.log(`GPC Toggled via message: ${gpcEnabled}`);
+  } else if (message.action === 'saveBackendCookiePreferences') {
+    // This message is sent from popup_chat.js when cookie preferences are changed in the UI
+    const prefs = {
+      allow_marketing: message.marketing,
+      allow_performance: message.performance
+    };
+    saveBackendCookiePreferences(prefs)
+      .then(() => sendResponse({ success: true, message: 'Cookie preferences saved to backend.' }))
+      .catch(error => sendResponse({ success: false, error: error.message }));
+    return true; // Respond asynchronously
   } else if (message.action == 'flushData') {
     let domain = message.domain;
     unCacheButtonData(domain);
