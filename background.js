@@ -118,7 +118,9 @@ function getGeminiNanoSession() {
   if (!sessionPromise) {
     //somePromise = chrome.aiOriginTrial.languageModel.capabilities().then((result) => {console.log("Do AI capabilities exist?", result)});
     sessionPromise = LanguageModel.create({
-      systemPrompt: "You are a friendly, helpful assistant specialized in detecting buttons corresponding to options such as 'accept_all', 'reject_all', 'manage_preferences', etc. in cookie consent banners.",
+      initial_prompts: [
+        {role: 'system', content: "You are a friendly, helpful assistant specialized in detecting buttons corresponding to options such as 'accept_all', 'reject_all', 'manage_preferences', etc. in cookie consent banners."}
+      ]
     }).then((newSession) => {
       console.log("Gemini Nano session created:", newSession);
       return newSession;
@@ -207,7 +209,9 @@ function getAgentGeminiNanoSession(context = null) {
       systemPrompt = systemPrompt + "\n\n" + context;
     }
     agentSessionPromise = LanguageModel.create({
-      systemPrompt: systemPrompt,
+      initial_prompts: [
+        { role: 'system', content: systemPrompt }
+      ]
     }).then((newSession) => {
       console.log("Gemini Nano session created:", newSession);
       return newSession;
